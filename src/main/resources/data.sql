@@ -1,0 +1,2 @@
+insert into product(id, name, description, price, weight, category, supplier) values(1,'Pie', 'delicious', '1.523', '0.250', '1', '1');
+insert into productCategory(id, name, description) values(1, 'Baked goods', 'fresh and tasty');
