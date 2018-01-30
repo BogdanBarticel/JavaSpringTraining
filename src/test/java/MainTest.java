@@ -3,10 +3,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import whatever.Controller.CreateService;
+import whatever.Controller.SearchStrategy;
 import whatever.Main;
-import whatever.model.Product;
-import whatever.model.ProductCategoryRepository;
-import whatever.model.ProductRepository;
+import whatever.model.*;
 
 import java.util.List;
 
@@ -22,6 +22,14 @@ public class MainTest {
     @Autowired
     private ProductCategoryRepository prodCatRepository;
 
+    @Autowired
+    CreateService create;
+
+    @Autowired
+    StockRepository stockRep;
+
+
+
     @Test
     public void findAllProducts() {
         List<Product> prods =(List) prodRepository.findAll();
@@ -34,5 +42,15 @@ public class MainTest {
         assertNotNull(prods);
         assertTrue(!prods.isEmpty());
     }
-
+    @Test
+    public void findLocations() {
+        List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 9L);
+        System.err.println(stocks.toString());
+        assertNotNull(stocks);
+        assertTrue(!stocks.isEmpty());
+        stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 10L);
+        assertTrue(stocks.isEmpty());
+        stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 11L);
+        assertTrue(stocks.isEmpty());
+    }
 }

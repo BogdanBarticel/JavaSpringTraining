@@ -23,7 +23,9 @@ public class Main {
             @Override
             public void run(String... args) throws Exception {
                 System.err.println(prodRep.findAll());
+                System.err.println(prodRep.findByCategory(1L));
                 System.err.println(prodCatRep.findAll());
+
             }
 
         };
