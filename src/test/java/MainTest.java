@@ -1,5 +1,7 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,6 +17,9 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Main.class)
 public class MainTest {
+
+    private static final Logger log = LoggerFactory.getLogger(MainTest.class);
+
     @Autowired
     private ProductRepository prodRepository;
 
@@ -44,7 +49,7 @@ public class MainTest {
     @Test
     public void findLocations() {
         List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 9L);
-        System.err.println(stocks.toString());
+        log.info(stocks.toString());
         assertNotNull(stocks);
         assertTrue(!stocks.isEmpty());
         stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 10L);
@@ -65,7 +70,7 @@ public class MainTest {
         address.setAddressStreet("a");
         request.setAddress(address);
         Order order = create.createOrder(request);
-        System.err.println(order.toString());
+        log.info(order.toString());
         assertNotNull(order);
     }
 }
