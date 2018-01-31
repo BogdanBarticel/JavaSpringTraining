@@ -11,8 +11,8 @@ public class SingleLocationSearch implements SearchStrategy {
     StockRepository stockRep;
 
     @Override
-    public Long findLocation(OrderDetail orderDetail) {
-        List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(orderDetail.getProduct(), orderDetail.getQuantity());
+    public Long findLocation(Long product, Long quantity) {
+        List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(product, quantity);
         if(!stocks.isEmpty()) return stocks.get(0).getLocation();
         return null;
     }

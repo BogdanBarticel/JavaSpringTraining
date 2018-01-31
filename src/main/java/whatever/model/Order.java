@@ -15,9 +15,7 @@ class Order {
     private long id;
     private long shippedFrom;
     private long customer;
-    private String addressCountry;
-    private String addressCity;
-    private String addressCounty;
-    private String addressStreet;
+    @Embedded
+    private Address destination;
 
 }

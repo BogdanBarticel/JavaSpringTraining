@@ -16,6 +16,10 @@ CREATE TABLE customer
     first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     user_name varchar(100) NOT NULL,
+    address_country varchar(100) NOT NULL,
+    address_county varchar(100) NOT NULL,
+    address_city varchar(100) NOT NULL,
+    address_street varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );
 

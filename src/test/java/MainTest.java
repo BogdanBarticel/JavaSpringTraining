@@ -3,8 +3,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import whatever.Controller.CreateService;
-import whatever.Controller.SearchStrategy;
+import whatever.Controller.CreateOrderService;
 import whatever.Main;
 import whatever.model.*;
 
@@ -23,7 +22,7 @@ public class MainTest {
     private ProductCategoryRepository prodCatRepository;
 
     @Autowired
-    CreateService create;
+    CreateOrderService create;
 
     @Autowired
     StockRepository stockRep;
@@ -52,5 +51,21 @@ public class MainTest {
         assertTrue(stocks.isEmpty());
         stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 11L);
         assertTrue(stocks.isEmpty());
+    }
+    @Test
+    public void createOrder() {
+        OrderRequest request = new OrderRequest();
+        request.setCustomer(1);
+        request.setProduct(1);
+        request.setQuantity(1);
+        Address address = new Address();
+        address.setAddressCity("a");
+        address.setAddressCounty("a");
+        address.setAddressCountry("a");
+        address.setAddressStreet("a");
+        request.setAddress(address);
+        Order order = create.createOrder(request);
+        System.err.println(order.toString());
+        assertNotNull(order);
     }
 }

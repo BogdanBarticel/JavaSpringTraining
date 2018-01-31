@@ -2,12 +2,9 @@ package whatever.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
-
+@Entity
 public @Data
 class Customer {
 
@@ -18,4 +15,6 @@ class Customer {
     private String firstName;
     private String lastName;
     private String userName;
+    @Embedded
+    private Address address;
 }
