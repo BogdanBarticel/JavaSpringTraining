@@ -27,13 +27,20 @@ public class MainTest {
     private ProductCategoryRepository prodCatRepository;
 
     @Autowired
+    private SupplierRepository supplierRep;
+
+    @Autowired
     CreateOrderService create;
 
     @Autowired
     StockRepository stockRep;
 
 
-
+    @Test
+    public void testMemDb() {
+        List<Supplier> sup = (List)supplierRep.findAll();
+        assertTrue(sup.size() < 3);
+    }
     @Test
     public void findAllProducts() {
         List<Product> prods =(List) prodRepository.findAll();
