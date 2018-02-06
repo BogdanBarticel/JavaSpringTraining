@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="690b11c6-09b1-46fc-98c1-f8416108b871" name="Default" comment="aaaaaa">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/whatever/Controller/ExportStockService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/whatever/exceptions/NoStockFoundException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/whatever/exceptions/OrderNotCreatedException.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/JavaSpringTraining.iml" afterPath="$PROJECT_DIR$/.idea/JavaSpringTraining.iml" />
+    <list default="true" id="690b11c6-09b1-46fc-98c1-f8416108b871" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/whatever/Controller/StockExportController.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/Controller/CreateOrderService.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/Controller/CreateOrderService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/Controller/FirstPage.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/Controller/SearchStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/Controller/SearchStrategy.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/Controller/SingleLocationSearch.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/Controller/SingleLocationSearch.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/Main.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/model/Address.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/model/Address.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/model/OrderRequest.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/model/OrderRequest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/model/Stock.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/model/Stock.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/whatever/model/StockRepository.java" afterPath="$PROJECT_DIR$/src/main/java/whatever/model/StockRepository.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__schema.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__schema.sql" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MainTest.java" afterPath="$PROJECT_DIR$/src/test/java/MainTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +28,7 @@
       <file leaf-file-name="CreateOrderService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/CreateOrderService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
+            <state relative-caret-position="3">
               <caret line="32" column="71" lean-forward="false" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
               <folding>
                 <element signature="e#550#551#0" expanded="true" />
@@ -52,10 +38,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="StockExportController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/StockExportController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4" column="62" lean-forward="false" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ExportStockService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/ExportStockService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="437">
               <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -100,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/MainTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="90" column="31" lean-forward="true" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
+            <state relative-caret-position="474">
+              <caret line="96" column="19" lean-forward="false" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -115,16 +111,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="253">
               <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Address.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/whatever/model/Address.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -155,6 +141,7 @@
     <findStrings>
       <find>System.err.println</find>
       <find>No Location could be found</find>
+      <find>Get</find>
     </findStrings>
     <replaceStrings>
       <replace>Log.info</replace>
@@ -169,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/whatever/ProductRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/whatever/ProductCategory.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migrations/V1_init.sql" />
@@ -220,6 +206,7 @@
         <option value="$PROJECT_DIR$/src/main/java/whatever/Controller/ExportStockService.java" />
         <option value="$PROJECT_DIR$/src/main/java/whatever/Controller/CreateOrderService.java" />
         <option value="$PROJECT_DIR$/src/test/java/MainTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/whatever/Controller/StockExportController.java" />
       </list>
     </option>
   </component>
@@ -387,7 +374,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MainTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -556,9 +543,9 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.MainTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.MainTest.createOrder" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.MainTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.MainTest.createOrder" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.MainTest.findLocations" />
       </list>
     </recent_temporary>
@@ -637,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517488356353</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added Exception cases and StockExportService">
+      <created>1517925241464</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1517925241464</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -678,11 +672,11 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45200893" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3392857" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42410713" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -712,7 +706,8 @@
     <MESSAGE value="improvements to OrderCreationService" />
     <MESSAGE value="replaced System prints with slf4j" />
     <MESSAGE value="schema and data separation, test specific db properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="schema and data separation, test specific db properties" />
+    <MESSAGE value="added Exception cases and StockExportService" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Exception cases and StockExportService" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -721,14 +716,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1105,16 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/ExportStockService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/whatever/model/Location.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -1123,9 +1100,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/MainTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="96" column="19" lean-forward="false" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/ExportStockService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/CreateOrderService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
+        <state relative-caret-position="3">
           <caret line="32" column="71" lean-forward="false" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
           <folding>
             <element signature="e#550#551#0" expanded="true" />
@@ -1134,10 +1129,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/MainTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/whatever/Controller/StockExportController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="90" column="31" lean-forward="true" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
+        <state relative-caret-position="92">
+          <caret line="4" column="62" lean-forward="false" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
           <folding />
         </state>
       </provider>
