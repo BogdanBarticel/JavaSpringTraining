@@ -12,8 +12,6 @@ public @Data
 class Stock {
 
     @Id
-    @SequenceGenerator(name = "gen", allocationSize= 1)
-    @GeneratedValue(generator = "gen")
     private long product;
     private long location;
     private long quantity;

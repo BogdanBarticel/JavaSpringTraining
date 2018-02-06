@@ -53,7 +53,7 @@ CREATE TABLE location
 CREATE TABLE stock
 (
     location bigint(11) NOT NULL,
-    product bigint(100) NOT NULL,
+    product bigint(11) NOT NULL,
     quantity bigint(11) NOT NULL,
     PRIMARY KEY (location, product)
 );

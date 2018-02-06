@@ -7,11 +7,9 @@ import java.util.List;
 
 public class SingleLocationSearch implements SearchStrategy {
 
-    @Autowired
-    StockRepository stockRep;
 
     @Override
-    public Long findLocation(Long product, Long quantity) {
+    public Long findLocation(Long product, Long quantity, StockRepository stockRep) {
         List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(product, quantity);
         if(!stocks.isEmpty()) return stocks.get(0).getLocation();
         return null;

@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import whatever.Controller.CreateOrderService;
+import whatever.Controller.ExportStockService;
+import whatever.Controller.SearchStrategy;
+import whatever.Controller.SingleLocationSearch;
 import whatever.Main;
+import whatever.exceptions.NoStockFoundException;
+import whatever.exceptions.OrderNotCreatedException;
 import whatever.model.*;
 
 import java.util.List;
@@ -30,29 +35,16 @@ public class MainTest {
     private SupplierRepository supplierRep;
 
     @Autowired
-    CreateOrderService create;
+    CreateOrderService orderCreator;
+
+    @Autowired
+    ExportStockService stockExporter;
 
     @Autowired
     StockRepository stockRep;
 
 
-    @Test
-    public void testMemDb() {
-        List<Supplier> sup = (List)supplierRep.findAll();
-        assertTrue(sup.size() < 3);
-    }
-    @Test
-    public void findAllProducts() {
-        List<Product> prods =(List) prodRepository.findAll();
-        assertNotNull(prods);
-        assertTrue(!prods.isEmpty());
-    }
-    @Test
-    public void findAllProductsCategories() {
-        List<Product> prods =(List) prodCatRepository.findAll();
-        assertNotNull(prods);
-        assertTrue(!prods.isEmpty());
-    }
+    //Todo: change to test single location search strategy
     @Test
     public void findLocations() {
         List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 9L);
@@ -66,18 +58,43 @@ public class MainTest {
     }
     @Test
     public void createOrder() {
-        OrderRequest request = new OrderRequest();
-        request.setCustomer(1);
-        request.setProduct(1);
-        request.setQuantity(1);
-        Address address = new Address();
-        address.setAddressCity("a");
-        address.setAddressCounty("a");
-        address.setAddressCountry("a");
-        address.setAddressStreet("a");
-        request.setAddress(address);
-        Order order = create.createOrder(request);
-        log.info(order.toString());
-        assertNotNull(order);
+        Order order;
+        SearchStrategy search = new SingleLocationSearch();
+        Address address = new Address("Somewhere", "over", "the", "rainbow");
+        OrderRequest request = new OrderRequest(1, 1,1, address);
+        Long location;
+        Stock controlStock;
+
+        location = search.findLocation(1L, 1L, stockRep);
+        controlStock = stockRep.findByProductAndLocation(1L,location);
+        assertTrue(controlStock.getQuantity() == 10);
+
+
+        orderCreator.setStrategy(new SingleLocationSearch());
+        try {
+            order = orderCreator.createOrder(request);
+            assertNotNull(order);
+            controlStock = stockRep.findByProductAndLocation(1L,order.getShippedFrom());
+            assertTrue(controlStock.getQuantity() == 9);
+        } catch (OrderNotCreatedException ex) {
+            log.info("OrderNotCreated");
+        }
+
+
+        request.setQuantity(10);
+        try {
+            order = orderCreator.createOrder(request);
+            assertTrue(order == null);
+        } catch (OrderNotCreatedException ex) { log.info(ex.getMessage());}
+    }
+    @Test
+    public void exportStock() {
+        Long locationId = 1L;
+        List<Stock> stocks;
+        try {
+            stocks = stockExporter.exportAllStocksFromLocation(locationId);
+            assertTrue(!stocks.isEmpty());
+            log.info(stocks.toString());
+        } catch (NoStockFoundException ex) { log.info(ex.getMessage());}
     }
 }
