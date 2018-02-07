@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spring.tutorial.util.CreateOrderService;
+import spring.tutorial.service.CreateOrderService;
 import spring.tutorial.service.ExportStockService;
 import spring.tutorial.Main;
 import spring.tutorial.exceptions.NoStockFoundException;

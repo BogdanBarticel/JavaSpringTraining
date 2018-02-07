@@ -1,4 +1,4 @@
-package spring.tutorial.util;
+package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import spring.tutorial.exceptions.OrderNotCreatedException;
 import spring.tutorial.model.*;
 import spring.tutorial.repository.OrderRepository;
 import spring.tutorial.repository.StockRepository;
+import spring.tutorial.util.SearchStrategy;
 
 @Service
 public class CreateOrderService {
