@@ -2,6 +2,7 @@ package whatever.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import whatever.exceptions.LocationNotFoundForProductException;
 import whatever.exceptions.OrderNotCreatedException;
 import whatever.model.*;
 
@@ -24,18 +25,20 @@ public class CreateOrderService {
         locationFinder = strategy;
     }
 
-    public Order createOrder(OrderRequest request) throws OrderNotCreatedException{
+    public Order createOrder(OrderRequest request) throws OrderNotCreatedException, LocationNotFoundForProductException{
         //CREATE ORDER
         Location loc;
         Order order = new Order();
         if(locationFinder == null) throw new OrderNotCreatedException("SearchStrategy was not set");
-        Long locationId = locationFinder.findLocation(request.getProduct(), request.getQuantity(), stockRep);
-        if(locationId == null) throw new OrderNotCreatedException("No location could be found");
-        loc = locationRep.findOne(locationId);
-        order.setShippedFrom(loc.getId());
-        order.setDestination(request.getAddress());
-        order.setCustomer(request.getCustomer());
-        orderRep.save(order);
+        try {
+            Long locationId = locationFinder.findLocation(request.getProduct(), request.getQuantity(), stockRep);
+            if (locationId == null) throw new OrderNotCreatedException("No location could be found");
+            loc = locationRep.findOne(locationId);
+            order.setShippedFrom(loc.getId());
+            order.setDestination(request.getAddress());
+            order.setCustomer(request.getCustomer());
+            orderRep.save(order);
+        } catch (LocationNotFoundForProductException ex) { throw ex;}
 
         //CREATE ORDER_DETAIL
         OrderDetail detail = new OrderDetail();

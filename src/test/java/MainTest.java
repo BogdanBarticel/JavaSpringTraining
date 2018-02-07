@@ -1,4 +1,6 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import whatever.Controller.ExportStockService;
 import whatever.Controller.SearchStrategy;
 import whatever.Controller.SingleLocationSearch;
 import whatever.Main;
+import whatever.exceptions.LocationNotFoundForProductException;
 import whatever.exceptions.NoStockFoundException;
 import whatever.exceptions.OrderNotCreatedException;
 import whatever.model.*;
@@ -44,18 +47,24 @@ public class MainTest {
     StockRepository stockRep;
 
 
-    //Todo: change to test single location search strategy
+
     @Test
-    public void findLocations() {
-        List<Stock> stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 9L);
-        log.info(stocks.toString());
-        assertNotNull(stocks);
-        assertTrue(!stocks.isEmpty());
-        stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 10L);
-        assertTrue(stocks.isEmpty());
-        stocks = stockRep.findByProductAndQuantityGreaterThan(1L, 11L);
-        assertTrue(stocks.isEmpty());
+    public void findLocationsWhereProductQuantityExists() {
+        SearchStrategy locationFinder = new SingleLocationSearch();
+        try {
+            Long locationId = locationFinder.findLocation(1L, 9L, stockRep);
+            assert (locationId == 1);
+        } catch (LocationNotFoundForProductException ex) {
+            log.info(ex.getMessage());
+        }
     }
+
+    @Test(expected=LocationNotFoundForProductException.class)
+    public void findLocationsWhereProductQuantityDoesNotExist() throws Exception {
+        SearchStrategy locationFinder = new SingleLocationSearch();
+        locationFinder.findLocation(1L, 11L, stockRep);
+    }
+
     @Test
     public void createOrder() {
         Order order;
@@ -65,10 +74,13 @@ public class MainTest {
         Long location;
         Stock controlStock;
 
-        location = search.findLocation(1L, 1L, stockRep);
-        controlStock = stockRep.findByProductAndLocation(1L,location);
-        assertTrue(controlStock.getQuantity() == 10);
-
+        try {
+            location = search.findLocation(1L, 1L, stockRep);
+            controlStock = stockRep.findByProductAndLocation(1L, location);
+            assertTrue(controlStock.getQuantity() == 10);
+        }catch (LocationNotFoundForProductException ex) {
+            log.info(ex.getMessage());
+        }
 
         orderCreator.setStrategy(new SingleLocationSearch());
         try {
@@ -77,7 +89,9 @@ public class MainTest {
             controlStock = stockRep.findByProductAndLocation(1L,order.getShippedFrom());
             assertTrue(controlStock.getQuantity() == 9);
         } catch (OrderNotCreatedException ex) {
-            log.info("OrderNotCreated");
+            log.info(ex.getMessage());
+        } catch (LocationNotFoundForProductException ex) {
+            log.info(ex.getMessage());
         }
 
 
@@ -85,8 +99,13 @@ public class MainTest {
         try {
             order = orderCreator.createOrder(request);
             assertTrue(order == null);
-        } catch (OrderNotCreatedException ex) { log.info(ex.getMessage());}
+        } catch (OrderNotCreatedException ex) {
+            log.info(ex.getMessage());
+        } catch (LocationNotFoundForProductException ex) {
+            log.info(ex.getMessage());
+        }
     }
+
     @Test
     public void exportStock() {
         Long locationId = 1L;
