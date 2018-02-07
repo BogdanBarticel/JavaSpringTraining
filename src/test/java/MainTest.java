@@ -5,16 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.spring.tutorial.Controller.CreateOrderService;
-import java.spring.tutorial.Controller.ExportStockService;
-import java.spring.tutorial.Controller.SearchStrategy;
-import java.spring.tutorial.Controller.SingleLocationSearch;
-import java.spring.tutorial.Main;
-import java.spring.tutorial.exceptions.LocationNotFoundForProductException;
-import java.spring.tutorial.exceptions.NoStockFoundException;
-import java.spring.tutorial.exceptions.OrderNotCreatedException;
+import spring.tutorial.Controller.CreateOrderService;
+import spring.tutorial.Controller.ExportStockService;
+import spring.tutorial.Controller.SearchStrategy;
+import spring.tutorial.Controller.SingleLocationSearch;
+import spring.tutorial.Main;
+import spring.tutorial.exceptions.LocationNotFoundForProductException;
+import spring.tutorial.exceptions.NoStockFoundException;
+import spring.tutorial.exceptions.OrderNotCreatedException;
+import spring.tutorial.model.*;
 
-import java.spring.tutorial.model.*;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
