@@ -1,13 +1,13 @@
-package spring.tutorial.Controller;
+package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.tutorial.exceptions.LocationNotFoundForProductException;
 import spring.tutorial.exceptions.OrderNotCreatedException;
 import spring.tutorial.model.*;
-import whatever.model.*;
-
-import java.spring.tutorial.model.*;
+import spring.tutorial.repository.LocationRepository;
+import spring.tutorial.repository.OrderRepository;
+import spring.tutorial.repository.StockRepository;
+import spring.tutorial.util.SearchStrategy;
 
 
 @Service
@@ -22,24 +22,19 @@ public class CreateOrderService {
 
     private SearchStrategy locationFinder;
 
-    public void setStrategy(SearchStrategy strategy){
-        locationFinder = strategy;
-    }
-
-    public Order createOrder(OrderRequest request) throws OrderNotCreatedException, LocationNotFoundForProductException {
+    public Order createOrder(OrderRequest request) throws OrderNotCreatedException {
         //CREATE ORDER
         Location loc;
         Order order = new Order();
         if(locationFinder == null) throw new OrderNotCreatedException("SearchStrategy was not set");
-        try {
-            Long locationId = locationFinder.findLocation(request.getProduct(), request.getQuantity(), stockRep);
-            if (locationId == null) throw new OrderNotCreatedException("No location could be found");
-            loc = locationRep.findOne(locationId);
-            order.setShippedFrom(loc.getId());
-            order.setDestination(request.getAddress());
-            order.setCustomer(request.getCustomer());
-            orderRep.save(order);
-        } catch (LocationNotFoundForProductException ex) { throw ex;}
+
+        Long locationId = locationFinder.findLocation(request.getProduct(), request.getQuantity(), stockRep);
+        if (locationId == null) throw new OrderNotCreatedException("No location could be found");
+        loc = locationRep.findOne(locationId);
+        order.setShippedFrom(loc.getId());
+        order.setDestination(request.getAddress());
+        order.setCustomer(request.getCustomer());
+        orderRep.save(order);
 
         //CREATE ORDER_DETAIL
         OrderDetail detail = new OrderDetail();

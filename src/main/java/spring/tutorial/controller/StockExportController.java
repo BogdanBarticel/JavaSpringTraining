@@ -1,4 +1,4 @@
-package spring.tutorial.Controller;
+package spring.tutorial.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.tutorial.exceptions.NoStockFoundException;
 import spring.tutorial.model.Stock;
+import spring.tutorial.service.ExportStockService;
 
 import java.util.List;
 

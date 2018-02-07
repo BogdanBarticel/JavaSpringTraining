@@ -5,15 +5,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spring.tutorial.Controller.CreateOrderService;
-import spring.tutorial.Controller.ExportStockService;
-import spring.tutorial.Controller.SearchStrategy;
-import spring.tutorial.Controller.SingleLocationSearch;
+import spring.tutorial.service.CreateOrderService;
+import spring.tutorial.service.ExportStockService;
+import spring.tutorial.util.SearchStrategy;
+import spring.tutorial.util.SingleLocationSearch;
 import spring.tutorial.Main;
-import spring.tutorial.exceptions.LocationNotFoundForProductException;
 import spring.tutorial.exceptions.NoStockFoundException;
 import spring.tutorial.exceptions.OrderNotCreatedException;
 import spring.tutorial.model.*;
+import spring.tutorial.repository.ProductCategoryRepository;
+import spring.tutorial.repository.ProductRepository;
+import spring.tutorial.repository.StockRepository;
+import spring.tutorial.repository.SupplierRepository;
 
 import java.util.List;
 
@@ -44,27 +47,16 @@ public class MainTest {
     @Autowired
     StockRepository stockRep;
 
-
-
     @Test
     public void findLocationsWhereProductQuantityExists() {
         SearchStrategy locationFinder = new SingleLocationSearch();
-        try {
             Long locationId = locationFinder.findLocation(1L, 9L, stockRep);
             assert (locationId == 1);
-        } catch (LocationNotFoundForProductException ex) {
-            log.info(ex.getMessage());
-        }
-    }
 
-    @Test(expected=LocationNotFoundForProductException.class)
-    public void findLocationsWhereProductQuantityDoesNotExist() throws Exception {
-        SearchStrategy locationFinder = new SingleLocationSearch();
-        locationFinder.findLocation(1L, 11L, stockRep);
     }
 
     @Test
-    public void createOrder() {
+    public void createOrder() throws OrderNotCreatedException{
         Order order;
         SearchStrategy search = new SingleLocationSearch();
         Address address = new Address("Somewhere", "over", "the", "rainbow");
@@ -72,36 +64,20 @@ public class MainTest {
         Long location;
         Stock controlStock;
 
-        try {
-            location = search.findLocation(1L, 1L, stockRep);
-            controlStock = stockRep.findByProductAndLocation(1L, location);
-            assertTrue(controlStock.getQuantity() == 10);
-        }catch (LocationNotFoundForProductException ex) {
-            log.info(ex.getMessage());
-        }
-
-        orderCreator.setStrategy(new SingleLocationSearch());
-        try {
-            order = orderCreator.createOrder(request);
-            assertNotNull(order);
-            controlStock = stockRep.findByProductAndLocation(1L,order.getShippedFrom());
-            assertTrue(controlStock.getQuantity() == 9);
-        } catch (OrderNotCreatedException ex) {
-            log.info(ex.getMessage());
-        } catch (LocationNotFoundForProductException ex) {
-            log.info(ex.getMessage());
-        }
+        location = search.findLocation(1L, 1L, stockRep);
+        controlStock = stockRep.findByProductAndLocation(1L, location);
+        assertTrue(controlStock.getQuantity() == 10);
+        
+        order = orderCreator.createOrder(request);
+        assertNotNull(order);
+        controlStock = stockRep.findByProductAndLocation(1L,order.getShippedFrom());
+        assertTrue(controlStock.getQuantity() == 9);
 
 
         request.setQuantity(10);
-        try {
-            order = orderCreator.createOrder(request);
-            assertTrue(order == null);
-        } catch (OrderNotCreatedException ex) {
-            log.info(ex.getMessage());
-        } catch (LocationNotFoundForProductException ex) {
-            log.info(ex.getMessage());
-        }
+        order = orderCreator.createOrder(request);
+        assertTrue(order == null);
+
     }
 
     @Test

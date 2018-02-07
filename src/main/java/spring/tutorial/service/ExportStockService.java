@@ -1,8 +1,8 @@
-package spring.tutorial.Controller;
+package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.tutorial.model.StockRepository;
+import spring.tutorial.repository.StockRepository;
 import spring.tutorial.exceptions.NoStockFoundException;
 import spring.tutorial.model.Stock;
 
