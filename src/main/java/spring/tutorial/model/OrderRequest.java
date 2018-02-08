@@ -10,6 +10,9 @@ class OrderRequest {
     private long quantity;
     private Address address;
 
+    private OrderRequest () {};
+
+
     public OrderRequest(long customer, long product, long quantity, Address address){
         this.customer = customer;
         this.product = product;

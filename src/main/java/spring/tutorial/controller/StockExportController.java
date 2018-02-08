@@ -1,5 +1,8 @@
 package spring.tutorial.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +22,11 @@ public class StockExportController {
 
     @RequestMapping("/export")
     @ResponseBody
-    public String export(@RequestParam("location")String location){
+    public String export(@RequestParam("location")String location) throws JsonProcessingException{
         try {
             List<Stock> stocks = stockExporter.exportAllStocksFromLocation(Integer.parseInt(location));
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValueAsString(stocks);
             return stocks.toString();
         } catch (NoStockFoundException ex) {
             return "nothing found";
