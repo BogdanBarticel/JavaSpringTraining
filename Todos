@@ -1,0 +1,4 @@
+-fix overuse of long where int is more appropriate
+-add timestamp to order request
+-improve schema with missing details
+-fix .gitignore
