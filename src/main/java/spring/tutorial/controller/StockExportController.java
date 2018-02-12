@@ -1,7 +1,11 @@
 package spring.tutorial.controller;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +29,10 @@ public class StockExportController {
     public String export(@RequestParam("location")String location) throws JsonProcessingException{
         try {
             List<Stock> stocks = stockExporter.exportAllStocksFromLocation(Integer.parseInt(location));
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValueAsString(stocks);
-            return stocks.toString();
+            final CsvMapper mapper = new CsvMapper();
+            final CsvSchema schema = mapper.schemaFor(Stock.class);
+            final String csv = mapper.writer(schema.withUseHeader(true)).writeValueAsString(stocks);
+            return csv;
         } catch (NoStockFoundException ex) {
             return "nothing found";
         }
