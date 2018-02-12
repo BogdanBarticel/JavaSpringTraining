@@ -4,4 +4,5 @@ public class TestItem {
 
     private String id;
     private String desc;
+    private String test;
 }
