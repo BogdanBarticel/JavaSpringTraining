@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import spring.tutorial.repository.StockRepository;
 import spring.tutorial.service.CreateOrderService;
 import spring.tutorial.service.ExportStockService;
 import spring.tutorial.Main;
@@ -27,13 +28,17 @@ public class MainTest {
     CreateOrderService orderCreator;
 
     @Autowired
+    StockRepository stockRepo;
+
+    @Autowired
     ExportStockService stockExporter;
 
     @Test(expected=OrderNotCreatedException.class)
     public void createOrder() throws OrderNotCreatedException{
+        Product prod = stockRepo.findOne(1L).getProduct();
         Order order;
         Address address = new Address("Somewhere", "over", "the", "rainbow");
-        OrderRequest request = new OrderRequest(1, 1,1, address);
+        OrderRequest request = new OrderRequest(new Customer(), prod,1, address);
 
         order = orderCreator.createOrder(request);
         assertNotNull(order);

@@ -10,11 +10,12 @@ public @Data
 class Order {
 
     @Id
-    @SequenceGenerator(name = "gen", allocationSize= 1)
-    @GeneratedValue(generator = "gen")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long shippedFrom;
-    private long customer;
+    @OneToOne
+    private Location shippedFrom;
+    @OneToOne
+    private Customer customer;
     @Embedded
     private Address destination;
 

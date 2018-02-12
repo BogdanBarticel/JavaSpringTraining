@@ -9,8 +9,7 @@ public @Data
 class Location {
 
     @Id
-    @SequenceGenerator(name = "gen", allocationSize= 1)
-    @GeneratedValue(generator = "gen")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     @Embedded

@@ -9,12 +9,14 @@ public @Data
 class OrderDetail {
 
     @Id
-    @Column(name="order_id")
-    private long order;
-    private long product;
-    private long quantity;
+    private long id;
+    @OneToOne
+    private Order order;
+    @OneToOne
+    private Product product;
+    private int quantity;
 
-    public OrderDetail(long order, long product, long quantity){
+    public OrderDetail(Order order, Product product, int quantity){
         this.order = order;
         this.quantity = quantity;
         this.product = product;

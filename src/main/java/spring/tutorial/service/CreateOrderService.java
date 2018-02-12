@@ -26,23 +26,23 @@ public class CreateOrderService {
     public Order createOrder(OrderRequest request) throws OrderNotCreatedException {
         Order order = new Order();
 
-        Long locationId = locationSearch.findLocation(request.getProduct(), request.getQuantity(), stockRep);
-        if (locationId == null) {
+        Location loc = locationSearch.findLocation(request.getProduct(), request.getQuantity(), stockRep);
+        if (loc == null) {
             throw new OrderNotCreatedException("No location could be found");
         }
 
-        order.setShippedFrom(locationId);
+        order.setShippedFrom(loc);
         order.setDestination(request.getAddress());
         order.setCustomer(request.getCustomer());
 
         orderRep.save(order);
-        OrderDetail detail = new OrderDetail(order.getId(), request.getProduct(), request.getQuantity());
+        OrderDetail detail = new OrderDetail(order, request.getProduct(), request.getQuantity());
         updateStock(detail.getProduct(), order.getShippedFrom(), detail.getQuantity());
         return order;
     }
 
-    private void updateStock(Long product, Long location, Long quantity){
-        Stock stock = stockRep.findByProductAndLocation(product, location);
+    private void updateStock(Product product, Location location, int quantity){
+        Stock stock = stockRep.findByProductAndLocation(product.getId(), location.getId());
         if(stock != null){
             stock.setQuantity(stock.getQuantity() - quantity);
             stockRep.save(stock);

@@ -1,12 +1,12 @@
-CREATE TABLE Product
+CREATE TABLE product
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
     description varchar(100) NOT NULL,
     price dec(100) NOT NULL,
     weight double(100) NOT NULL,
-    category bigint(11) NOT NULL,
-    supplier bigint(11) NOT NULL,
+    category_id bigint(11) NOT NULL,
+    supplier_id bigint(11) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -22,7 +22,6 @@ CREATE TABLE customer
     address_street varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );
-
 
 CREATE TABLE product_category
 (
@@ -52,26 +51,27 @@ CREATE TABLE location
 
 CREATE TABLE stock
 (
-    location bigint(11) NOT NULL,
-    product bigint(11) NOT NULL,
-    quantity bigint(11) NOT NULL,
-    PRIMARY KEY (location, product)
+    id bigint(11) NOT NULL AUTO_INCREMENT,
+    location_id bigint(11) NOT NULL,
+    product_id bigint(11) NOT NULL,
+    quantity int(11) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE order_detail
 (
+    id bigint(11) NOT NULL AUTO_INCREMENT,
     order_id bigint(11) NOT NULL,
-    product bigint(100) NOT NULL,
-    quantity bigint(100) NOT NULL,
-    PRIMARY KEY (order_id)
+    product_id bigint(11) NOT NULL,
+    quantity int(11) NOT NULL,
+    PRIMARY KEY (id)
 );
-
 
 CREATE TABLE order_list
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
-    shipped_from bigint(100) NOT NULL,
-    customer bigint(100) NOT NULL,
+    shipped_from_id bigint(11) NOT NULL,
+    customer_id bigint(11) NOT NULL,
     address_country varchar(100) NOT NULL,
     address_county varchar(100) NOT NULL,
     address_city varchar(100) NOT NULL,
