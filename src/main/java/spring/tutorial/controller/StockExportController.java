@@ -1,12 +1,9 @@
 package spring.tutorial.controller;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.tutorial.exceptions.NoStockFoundException;
 import spring.tutorial.model.Stock;
+import spring.tutorial.model.pojo.StockPojo;
 import spring.tutorial.service.ExportStockService;
 
 import java.util.List;
@@ -26,12 +24,13 @@ public class StockExportController {
 
     @RequestMapping("/export")
     @ResponseBody
-    public String export(@RequestParam("location")String location) throws JsonProcessingException{
+    public String export(@RequestParam("location")int location) throws JsonProcessingException{
         try {
-            List<Stock> stocks = stockExporter.exportAllStocksFromLocation(Integer.parseInt(location));
+            List<Stock> stocks = stockExporter.exportAllStocksFromLocation(location);
+            List<StockPojo> stockPojos = StockPojo.fromStockList(stocks);
             final CsvMapper mapper = new CsvMapper();
-            final CsvSchema schema = mapper.schemaFor(Stock.class);
-            final String csv = mapper.writer(schema.withUseHeader(true)).writeValueAsString(stocks);
+            final CsvSchema schema = mapper.schemaFor(StockPojo.class);
+            final String csv = mapper.writer(schema.withUseHeader(true)).writeValueAsString(stockPojos);
             return csv;
         } catch (NoStockFoundException ex) {
             return "nothing found";

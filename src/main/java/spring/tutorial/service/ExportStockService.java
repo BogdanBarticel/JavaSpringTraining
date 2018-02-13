@@ -15,7 +15,7 @@ public class ExportStockService {
     StockRepository stockRep;
 
     public List<Stock> exportAllStocksFromLocation(long locationId) throws NoStockFoundException {
-        List<Stock> stocks  = stockRep.findByLocation(locationId);
+        List<Stock> stocks  = stockRep.findByLocationId(locationId);
         if (stocks.isEmpty()) throw new NoStockFoundException("No Stock Was found In Location '" + locationId + "'");
         return stocks;
     }

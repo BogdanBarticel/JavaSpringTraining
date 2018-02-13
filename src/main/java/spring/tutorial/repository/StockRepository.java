@@ -8,7 +8,7 @@ import java.util.List;
 public interface StockRepository extends CrudRepository<Stock, Long>{
 
     List<Stock> findByProductAndQuantityGreaterThan(Long product, Long Quantity);
-    List<Stock> findByLocation(long locationId);
+    List<Stock> findByLocationId(long locationId);
     Stock findByProductAndLocation(long product, long Location);
 
 }
