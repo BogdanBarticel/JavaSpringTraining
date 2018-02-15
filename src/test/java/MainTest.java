@@ -52,7 +52,7 @@ public class MainTest {
     public void exportStock() throws NoStockFoundException {
         Location location = new Location();
         List<Stock> stocks;
-        stocks = stockExporter.exportAllStocksFromLocation(location,stockRepo);
+        stocks = stockExporter.exportAllStocksFromLocation(location);
         assertTrue(!stocks.isEmpty());
         log.info(stocks.toString());
 

@@ -12,10 +12,17 @@ import java.util.List;
 @Service
 public class ExportStockService {
 
-    public List<Stock> exportAllStocksFromLocation(Location location, StockRepository stockRep) throws NoStockFoundException {
+    private StockRepository stockRep;
+
+    @Autowired
+    public ExportStockService(StockRepository stockRep) {
+        this.stockRep = stockRep;
+    }
+
+    public List<Stock> exportAllStocksFromLocation(Location location) {
         List<Stock> stocks = stockRep.findByLocation(location);
         if (stocks.isEmpty()) {
-            throw new NoStockFoundException("No Stock Was found In Location '" + location + "'");
+            throw new NoStockFoundException();
         }
         return stocks;
     }

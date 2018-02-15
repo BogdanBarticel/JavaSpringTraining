@@ -4,9 +4,9 @@ insert into product_category (name, description) values ('Moto', 'Motorcycle');
 insert into supplier (name) values ('Volkswagen Automotive Group');
 insert into supplier (name) values ('Yamaha Motorsports');
 
-insert into location (name, address_country, address_city, address_county, address_street) values ('Depo No 1', 'Romania', 'Iasi', 'Iasi', 'Bul Poitiers nr. 11');
-insert into location (name, address_country, address_city, address_county, address_street) values ('Depo No 2', 'Romania', 'Bucuresti', 'Ilfov', 'Calea Eroilor nr 1');
-insert into location (name, address_country, address_city, address_county, address_street) values ('Depo No 3', 'Romania', 'Cluj-Napoca', 'Cluj', 'Str. Samuel Brassai nr. 6');
+insert into location (name, country, city, county, street) values ('Depo No 1', 'Romania', 'Iasi', 'Iasi', 'Bul Poitiers nr. 11');
+insert into location (name, country, city, county, street) values ('Depo No 2', 'Romania', 'Bucuresti', 'Ilfov', 'Calea Eroilor nr 1');
+insert into location (name, country, city, county, street) values ('Depo No 3', 'Romania', 'Cluj-Napoca', 'Cluj', 'Str. Samuel Brassai nr. 6');
 
 insert into stock (location_id, product_id, quantity) values (1,1, 10);
 insert into stock (location_id, product_id, quantity) values (1,2, 20);

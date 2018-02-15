@@ -18,8 +18,8 @@ class Product {
     private BigDecimal price;
     private Double weight;
     @ManyToOne
-    private Product category;
-    @OneToMany
+    private ProductCategory category;
+    @ManyToOne
     private Supplier supplier;
 
 }

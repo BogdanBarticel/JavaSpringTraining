@@ -10,9 +10,9 @@ class OrderDetail {
 
     @Id
     private long id;
-    @OneToOne
+    @ManyToOne
     private Order order;
-    @OneToOne
+    @ManyToOne
     private Product product;
     private int quantity;
 

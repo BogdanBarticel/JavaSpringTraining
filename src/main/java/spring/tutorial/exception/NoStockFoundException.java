@@ -1,8 +1,8 @@
 package spring.tutorial.exception;
 
-public class NoStockFoundException extends Exception {
-    public NoStockFoundException(String message) {
-        super(message);
+public class NoStockFoundException extends RuntimeException {
+    public NoStockFoundException() {
+        super("No Stock Was found");
     }
 
 }

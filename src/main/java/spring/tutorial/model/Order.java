@@ -14,7 +14,7 @@ class Order {
     private long id;
     @ManyToOne
     private Location shippedFrom;
-    @OneToOne
+    @ManyToOne
     private Customer customer;
     @Embedded
     private Address destination;
