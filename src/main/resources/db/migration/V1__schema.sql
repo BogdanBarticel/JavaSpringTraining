@@ -16,10 +16,10 @@ CREATE TABLE customer
     first_name varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     user_name varchar(100) NOT NULL,
-    address_country varchar(100) NOT NULL,
-    address_county varchar(100) NOT NULL,
-    address_city varchar(100) NOT NULL,
-    address_street varchar(100) NOT NULL,
+    country varchar(100) NOT NULL,
+    county varchar(100) NOT NULL,
+    city varchar(100) NOT NULL,
+    street varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -42,10 +42,10 @@ CREATE TABLE location
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
-    address_country varchar(100) NOT NULL,
-    address_county varchar(100) NOT NULL,
-    address_city varchar(100) NOT NULL,
-    address_street varchar(100) NOT NULL,
+    country varchar(100) NOT NULL,
+    county varchar(100) NOT NULL,
+    city varchar(100) NOT NULL,
+    street varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -72,10 +72,10 @@ CREATE TABLE order_list
     id bigint(11) NOT NULL AUTO_INCREMENT,
     shipped_from_id bigint(11) NOT NULL,
     customer_id bigint(11) NOT NULL,
-    address_country varchar(100) NOT NULL,
-    address_county varchar(100) NOT NULL,
-    address_city varchar(100) NOT NULL,
-    address_street varchar(100) NOT NULL,
+    country varchar(100) NOT NULL,
+    county varchar(100) NOT NULL,
+    city varchar(100) NOT NULL,
+    street varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );
 

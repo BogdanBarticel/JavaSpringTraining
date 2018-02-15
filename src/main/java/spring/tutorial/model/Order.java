@@ -5,14 +5,14 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name="orderList")
+@Table(name = "orderList")
 public @Data
 class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToOne
+    @ManyToOne
     private Location shippedFrom;
     @OneToOne
     private Customer customer;

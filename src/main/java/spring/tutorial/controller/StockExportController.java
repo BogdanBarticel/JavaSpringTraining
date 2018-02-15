@@ -4,29 +4,26 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import spring.tutorial.exceptions.NoStockFoundException;
+import org.springframework.web.bind.annotation.*;
+import spring.tutorial.exception.NoStockFoundException;
+import spring.tutorial.model.Location;
 import spring.tutorial.model.Stock;
 import spring.tutorial.model.pojo.StockPojo;
+import spring.tutorial.repository.StockRepository;
 import spring.tutorial.service.ExportStockService;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class StockExportController {
 
-    @Autowired
-    ExportStockService stockExporter;
-
-    @RequestMapping("/export")
+    @RequestMapping(method = RequestMethod.GET, value = "/export")
     @ResponseBody
-    public String export(@RequestParam("location")int location) throws JsonProcessingException{
+    public String export(@RequestParam("location") int locationId, ExportStockService stockExporter, StockRepository stockRepo) throws JsonProcessingException {
         try {
-            List<Stock> stocks = stockExporter.exportAllStocksFromLocation(location);
+            Location location = new Location();
+            location.setId(locationId);
+            List<Stock> stocks = stockExporter.exportAllStocksFromLocation(location, stockRepo);
             List<StockPojo> stockPojos = StockPojo.fromStockList(stocks);
             final CsvMapper mapper = new CsvMapper();
             final CsvSchema schema = mapper.schemaFor(StockPojo.class);

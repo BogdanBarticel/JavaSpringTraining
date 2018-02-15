@@ -9,8 +9,8 @@ import spring.tutorial.repository.StockRepository;
 import spring.tutorial.service.CreateOrderService;
 import spring.tutorial.service.ExportStockService;
 import spring.tutorial.Main;
-import spring.tutorial.exceptions.NoStockFoundException;
-import spring.tutorial.exceptions.OrderNotCreatedException;
+import spring.tutorial.exception.NoStockFoundException;
+import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
 
 import java.util.List;
@@ -25,20 +25,20 @@ public class MainTest {
     private static final Logger log = LoggerFactory.getLogger(MainTest.class);
 
     @Autowired
-    CreateOrderService orderCreator;
+    private CreateOrderService orderCreator;
 
     @Autowired
-    StockRepository stockRepo;
+    private StockRepository stockRepo;
 
     @Autowired
-    ExportStockService stockExporter;
+    private ExportStockService stockExporter;
 
-    @Test(expected=OrderNotCreatedException.class)
-    public void createOrder() throws OrderNotCreatedException{
+    @Test(expected = OrderNotCreatedException.class)
+    public void createOrder() throws OrderNotCreatedException {
         Product prod = stockRepo.findOne(1L).getProduct();
         Order order;
         Address address = new Address("Somewhere", "over", "the", "rainbow");
-        OrderRequest request = new OrderRequest(new Customer(), prod,1, address);
+        OrderRequest request = new OrderRequest(new Customer(), prod, 1, address);
 
         order = orderCreator.createOrder(request);
         assertNotNull(order);
@@ -49,10 +49,10 @@ public class MainTest {
     }
 
     @Test
-    public void exportStock() throws NoStockFoundException{
-        Long locationId = 1L;
+    public void exportStock() throws NoStockFoundException {
+        Location location = new Location();
         List<Stock> stocks;
-        stocks = stockExporter.exportAllStocksFromLocation(locationId);
+        stocks = stockExporter.exportAllStocksFromLocation(location,stockRepo);
         assertTrue(!stocks.isEmpty());
         log.info(stocks.toString());
 

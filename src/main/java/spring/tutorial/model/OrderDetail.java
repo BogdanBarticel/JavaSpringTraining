@@ -16,7 +16,7 @@ class OrderDetail {
     private Product product;
     private int quantity;
 
-    public OrderDetail(Order order, Product product, int quantity){
+    public OrderDetail(Order order, Product product, int quantity) {
         this.order = order;
         this.quantity = quantity;
         this.product = product;

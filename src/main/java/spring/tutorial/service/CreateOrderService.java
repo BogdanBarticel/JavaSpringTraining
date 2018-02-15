@@ -2,7 +2,7 @@ package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.tutorial.exceptions.OrderNotCreatedException;
+import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
 import spring.tutorial.repository.OrderRepository;
 import spring.tutorial.repository.StockRepository;
@@ -41,9 +41,9 @@ public class CreateOrderService {
         return order;
     }
 
-    private void updateStock(Product product, Location location, int quantity){
-        Stock stock = stockRep.findByProductAndLocation(product.getId(), location.getId());
-        if(stock != null){
+    private void updateStock(Product product, Location location, int quantity) {
+        Stock stock = stockRep.findByProductAndLocation(product, location);
+        if (stock != null) {
             stock.setQuantity(stock.getQuantity() - quantity);
             stockRep.save(stock);
         }

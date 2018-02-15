@@ -15,10 +15,10 @@ class OrderRequest {
     @Embedded
     private Address address;
 
-    private OrderRequest () {};
+    private OrderRequest() {
+    }
 
-
-    public OrderRequest(Customer customer, Product product, int quantity, Address address){
+    public OrderRequest(Customer customer, Product product, int quantity, Address address) {
         this.customer = customer;
         this.product = product;
         this.quantity = quantity;

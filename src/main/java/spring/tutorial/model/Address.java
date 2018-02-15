@@ -1,24 +1,19 @@
 package spring.tutorial.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public @Data
 class Address {
-    private String addressCountry;
-    private String addressCity;
-    private String addressCounty;
-    private String addressStreet;
-
-    public Address(String country, String city, String county, String street){
-        addressCity = city;
-        addressCountry = country;
-        addressCounty = county;
-        addressStreet = street;
-    }
-
-    public Address() {};
+    private String country;
+    private String city;
+    private String county;
+    private String street;
 
 }

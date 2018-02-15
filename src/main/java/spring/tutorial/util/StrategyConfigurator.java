@@ -9,13 +9,15 @@ import org.springframework.context.annotation.Configuration;
 public class StrategyConfigurator {
 
     @Bean
-    public SearchStrategy setSearchStrategy(@Value("${spring.search.strategy}") String strategy){
+    public SearchStrategy setSearchStrategy(@Value("${spring.search.strategy}") String strategy) {
         SearchStrategy searchStrategy;
         switch (strategy) {
-            case "single" : searchStrategy = new SingleLocationSearch();
-                            break;
-            default :       searchStrategy = new SingleLocationSearch();
-                            break;
+            case "single":
+                searchStrategy = new SingleLocationSearch();
+                break;
+            default:
+                searchStrategy = new SingleLocationSearch();
+                break;
         }
         return searchStrategy;
     }

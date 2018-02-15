@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public @Data class Product {
+public @Data
+class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,9 +17,9 @@ public @Data class Product {
     private String description;
     private BigDecimal price;
     private Double weight;
-    @OneToOne
+    @ManyToOne
     private Product category;
-    @OneToOne
+    @OneToMany
     private Supplier supplier;
 
 }
