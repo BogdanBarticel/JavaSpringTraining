@@ -1,27 +1,22 @@
 package spring.tutorial.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embedded;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import java.util.Map;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public @Data
 class OrderRequest {
 
     private Customer customer;
-    @OneToOne
-    private Product product;
-    private int quantity;
+    @ManyToOne
+    private Map<Product, Integer> products;
     @Embedded
-    private Address address;
+    private Address destination;
 
-    private OrderRequest () {};
-
-
-    public OrderRequest(Customer customer, Product product, int quantity, Address address){
-        this.customer = customer;
-        this.product = product;
-        this.quantity = quantity;
-        this.address = address;
-    }
 }

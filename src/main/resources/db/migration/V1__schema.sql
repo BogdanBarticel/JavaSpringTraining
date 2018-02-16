@@ -63,6 +63,7 @@ CREATE TABLE order_detail
     id bigint(11) NOT NULL AUTO_INCREMENT,
     order_id bigint(11) NOT NULL,
     product_id bigint(11) NOT NULL,
+    shipped_from_id bigint(11) NOT NULL,
     quantity int(11) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -70,7 +71,6 @@ CREATE TABLE order_detail
 CREATE TABLE order_list
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
-    shipped_from_id bigint(11) NOT NULL,
     customer_id bigint(11) NOT NULL,
     country varchar(100) NOT NULL,
     county varchar(100) NOT NULL,

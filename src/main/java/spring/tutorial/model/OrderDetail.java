@@ -9,6 +9,7 @@ public @Data
 class OrderDetail {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
     private Order order;
@@ -16,10 +17,9 @@ class OrderDetail {
     private Product product;
     private int quantity;
 
-    public OrderDetail(Order order, Product product, int quantity) {
-        this.order = order;
-        this.quantity = quantity;
+    public OrderDetail(Product product, int quantity) {
         this.product = product;
+        this.quantity = quantity;
     }
 
 }

@@ -13,10 +13,11 @@ class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
-    private Location shippedFrom;
-    @ManyToOne
     private Customer customer;
+    @ManyToOne
+    private Location shippedFrom;
     @Embedded
+
     private Address destination;
 
 }

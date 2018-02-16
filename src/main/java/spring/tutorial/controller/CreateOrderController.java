@@ -19,7 +19,7 @@ public class CreateOrderController {
         this.orderCreator = orderCreator;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "create")
     @ResponseBody
     public Order createOrder(@RequestBody OrderRequest orderRequest) throws OrderNotCreatedException {
 

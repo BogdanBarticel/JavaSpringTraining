@@ -4,7 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import spring.tutorial.model.Order;
 import spring.tutorial.model.OrderDetail;
 
+import java.util.List;
+
 public interface OrderDetailRepository extends CrudRepository<OrderDetail, Long> {
 
-    OrderDetail findByOrder(Order order);
+    List<OrderDetail> findByOrder(Order order);
 }

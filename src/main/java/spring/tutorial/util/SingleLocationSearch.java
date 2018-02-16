@@ -1,13 +1,13 @@
 package spring.tutorial.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import spring.tutorial.exception.NoStockFoundException;
-import spring.tutorial.model.*;
+import spring.tutorial.model.Location;
+import spring.tutorial.model.Order;
+import spring.tutorial.model.OrderDetail;
 import spring.tutorial.repository.OrderDetailRepository;
 import spring.tutorial.repository.StockRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SingleLocationSearch implements SearchStrategy {
 
@@ -21,8 +21,17 @@ public class SingleLocationSearch implements SearchStrategy {
 
 
     @Override
-    public Location findLocation(OrderRequest orderRequest) {
-        Stock stock = Optional.ofNullable(stockRep.findByProductAndQuantityGreaterThan(orderRequest.getProduct(), orderRequest.getQuantity())).orElseThrow(NoStockFoundException::new);
-        return stock.getLocation();
+    public Location findLocation(Order order) {
+        Location location = null;
+        List<OrderDetail> orderDetails = detailRep.findByOrder(order);
+        for (OrderDetail orderDetail : orderDetails) {
+            Location thisLocation = stockRep.findByProductAndQuantityGreaterThan(orderDetail.getProduct(), orderDetail.getQuantity()).getLocation();
+            if (location == null) {
+                location = thisLocation;
+            } else if (!thisLocation.equals(location)) {
+                throw new NoStockFoundException();
+            }
+        }
+        return location;
     }
 }

@@ -2,10 +2,10 @@ package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.tutorial.model.Location;
-import spring.tutorial.repository.StockRepository;
 import spring.tutorial.exception.NoStockFoundException;
+import spring.tutorial.model.Location;
 import spring.tutorial.model.Stock;
+import spring.tutorial.repository.StockRepository;
 
 import java.util.List;
 
