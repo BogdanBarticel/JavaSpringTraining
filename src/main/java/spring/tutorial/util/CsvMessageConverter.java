@@ -59,14 +59,14 @@ public class CsvMessageConverter extends AbstractGenericHttpMessageConverter<Lis
 
     private void toCSV(Class clazz, List list, OutputStream outputStream) throws IOException {
             final CsvMapper mapper = new CsvMapper();
-            final CsvSchema schema = mapper.schemaFor(clazz);
+            final CsvSchema schema = mapper.schemaFor(clazz).withHeader();
             mapper.writer(schema.withUseHeader(true)).writeValuesAsArray(outputStream).writeAll(list);
             outputStream.close();
     }
 
     private List fromCSV(Class clazz, InputStream inputStream) throws IOException {
         final CsvMapper mapper = new CsvMapper();
-        final CsvSchema schema = mapper.schemaFor(clazz);
+        final CsvSchema schema = mapper.schemaFor(clazz).withHeader();
         MappingIterator mappingIterator = mapper.readerFor(clazz).with(schema).readValues(inputStream);
         return mappingIterator.readAll();
 

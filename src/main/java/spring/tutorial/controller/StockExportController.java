@@ -22,7 +22,8 @@ public class StockExportController {
 
 
     @GetMapping(path = "/export", produces = "text/csv")
-    public List<StockPojo> export(@RequestParam("location") int locationId) {
-        return StockPojo.fromStockList(stockExporter.exportAllStocksFromLocation(locationId));
+    public List<StockPojo> export(@RequestParam("location") long locationId) {
+        int id = (int)locationId;
+        return StockPojo.fromStockList(stockExporter.exportAllStocksFromLocation(id));
     }
 }
