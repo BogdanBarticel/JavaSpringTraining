@@ -2,9 +2,10 @@ package spring.tutorial.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-import spring.tutorial.exception.OrderNotCreatedException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import spring.tutorial.model.Order;
 import spring.tutorial.model.OrderRequest;
 import spring.tutorial.service.CreateOrderService;
@@ -21,7 +22,7 @@ public class CreateOrderController {
 
     @PostMapping(value = "create")
     @ResponseBody
-    public Order createOrder(@RequestBody OrderRequest orderRequest) throws OrderNotCreatedException {
+    public Order createOrder(@RequestBody OrderRequest orderRequest){
 
         return orderCreator.createOrder(orderRequest);
 

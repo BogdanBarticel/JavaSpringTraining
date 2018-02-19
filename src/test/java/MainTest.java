@@ -20,6 +20,7 @@ import static junit.framework.TestCase.assertTrue;
 @SpringBootTest(classes = Main.class)
 public class MainTest {
 
+
     private static final Logger log = LoggerFactory.getLogger(MainTest.class);
 
     @Autowired
@@ -43,7 +44,7 @@ public class MainTest {
     public void exportStock() throws NoStockFoundException {
         Location location = new Location();
         List<Stock> stocks;
-        stocks = stockExporter.exportAllStocksFromLocation(location);
+        stocks = stockExporter.exportAllStocksFromLocation(1);
         assertTrue(!stocks.isEmpty());
         log.info(stocks.toString());
     }
