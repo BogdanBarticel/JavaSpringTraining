@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import spring.tutorial.repository.OrderDetailRepository;
+import spring.tutorial.repository.ProductRepository;
 import spring.tutorial.repository.StockRepository;
 
 
@@ -12,12 +12,12 @@ import spring.tutorial.repository.StockRepository;
 public class StrategyConfigurator {
 
     private StockRepository stockRepo;
-    private OrderDetailRepository detailRepo;
+    private ProductRepository prodRepo;
 
     @Autowired
-    public StrategyConfigurator(StockRepository stockRepo, OrderDetailRepository detailRepo) {
+    public StrategyConfigurator(StockRepository stockRepo, ProductRepository prodRepo) {
         this.stockRepo = stockRepo;
-        this.detailRepo = detailRepo;
+        this.prodRepo = prodRepo;
     }
 
     public StrategyConfigurator() {
@@ -28,9 +28,9 @@ public class StrategyConfigurator {
 
         switch (strategy) {
             case "single":
-                return new SingleLocationSearch(stockRepo, detailRepo);
+                return new SingleLocationSearch(stockRepo, prodRepo);
             default:
-                return new SingleLocationSearch(stockRepo, detailRepo);
+                return new SingleLocationSearch(stockRepo, prodRepo);
         }
     }
 

@@ -72,4 +72,25 @@ public class CsvMessageConverter extends AbstractGenericHttpMessageConverter<Lis
 
 
     }
+
+    @Override
+    public boolean canRead(Type type, Class<?> contextClass, MediaType mediaType) {
+        boolean isList = false;
+        if (type instanceof ParameterizedType) {
+            isList = ((ParameterizedType) type).getRawType().getTypeName().equalsIgnoreCase(List.class.getName());
+        }
+
+        return isList && super.canWrite(type, contextClass, mediaType);
+    }
+
+    @Override
+    public boolean canWrite(Type type, Class<?> clazz, MediaType mediaType) {
+        boolean isList = false;
+        if (type instanceof ParameterizedType) {
+            isList = ((ParameterizedType) type).getRawType().getTypeName().equalsIgnoreCase(List.class.getName());
+        }
+
+        return isList && super.canWrite(type, clazz, mediaType);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import spring.tutorial.model.pojo.StockPojo;
 import spring.tutorial.repository.LocationRepository;
 import spring.tutorial.repository.StockRepository;
@@ -27,6 +28,7 @@ import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Main.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebAppConfiguration
 public class MainTest {
 
 

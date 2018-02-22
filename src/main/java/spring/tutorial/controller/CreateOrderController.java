@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import spring.tutorial.model.Order;
 import spring.tutorial.model.OrderRequest;
 import spring.tutorial.service.CreateOrderService;
 
@@ -14,17 +13,16 @@ import spring.tutorial.service.CreateOrderService;
 public class CreateOrderController {
 
     private CreateOrderService orderCreator;
-
     @Autowired
     public CreateOrderController(CreateOrderService orderCreator) {
         this.orderCreator = orderCreator;
     }
 
-    @PostMapping(value = "create")
+    @PostMapping(path = "create", consumes = "application/json", produces = "text/html")
     @ResponseBody
-    public Order createOrder(@RequestBody OrderRequest orderRequest){
+    public String createOrder(@RequestBody OrderRequest orderRequest){
 
-        return orderCreator.createOrder(orderRequest);
+        return orderCreator.createOrder(orderRequest).toString();
 
     }
 }

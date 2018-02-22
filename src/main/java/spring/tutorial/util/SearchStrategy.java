@@ -1,9 +1,10 @@
 package spring.tutorial.util;
 
 import spring.tutorial.model.Location;
-import spring.tutorial.model.Order;
+
+import java.util.Map;
 
 public interface SearchStrategy {
 
-    Location findLocation(Order order);
+    Location findLocation(Map<Integer, Integer> productQuantity);
 }

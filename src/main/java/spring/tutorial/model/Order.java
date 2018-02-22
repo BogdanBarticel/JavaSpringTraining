@@ -12,6 +12,7 @@ class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private long timeStamp;
     @ManyToOne
     private Customer customer;
     @ManyToOne

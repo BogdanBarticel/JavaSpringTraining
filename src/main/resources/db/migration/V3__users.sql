@@ -1,0 +1,1 @@
+insert into customer (first_name, last_name, user_name, country, county, city, street, password) values ('Maricica', 'Petronela', 'maricica4you79', 'Romania', 'Vaslui', 'Vaslui', 'Str. Baltii nr. 9', 'msg123')

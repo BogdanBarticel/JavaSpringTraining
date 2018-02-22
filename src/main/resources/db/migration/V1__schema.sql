@@ -20,6 +20,7 @@ CREATE TABLE customer
     county varchar(100) NOT NULL,
     city varchar(100) NOT NULL,
     street varchar(100) NOT NULL,
+    password varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -70,6 +71,7 @@ CREATE TABLE order_detail
 CREATE TABLE order_list
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
+    time_stamp bigint(100) NOT NULL,
     shipped_from_id bigint(11) NOT NULL,
     customer_id bigint(11) NOT NULL,
     country varchar(100) NOT NULL,

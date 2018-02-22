@@ -2,30 +2,29 @@ package spring.tutorial.util;
 
 import spring.tutorial.exception.NoStockFoundException;
 import spring.tutorial.model.Location;
-import spring.tutorial.model.Order;
-import spring.tutorial.model.OrderDetail;
-import spring.tutorial.repository.OrderDetailRepository;
+import spring.tutorial.model.Product;
+import spring.tutorial.repository.ProductRepository;
 import spring.tutorial.repository.StockRepository;
 
-import java.util.List;
+import java.util.Map;
 
 public class SingleLocationSearch implements SearchStrategy {
 
     private StockRepository stockRep;
-    private OrderDetailRepository detailRep;
+    private ProductRepository prodRep;
 
-    public SingleLocationSearch(StockRepository stockRep, OrderDetailRepository detailRep) {
+    public SingleLocationSearch(StockRepository stockRep, ProductRepository prodRep) {
         this.stockRep = stockRep;
-        this.detailRep = detailRep;
+        this.prodRep = prodRep;
     }
 
 
     @Override
-    public Location findLocation(Order order) {
+    public Location findLocation(Map<Integer, Integer> productQuantity) {
         Location location = null;
-        List<OrderDetail> orderDetails = detailRep.findByOrder(order);
-        for (OrderDetail orderDetail : orderDetails) {
-            Location thisLocation = stockRep.findByProductAndQuantityGreaterThan(orderDetail.getProduct(), orderDetail.getQuantity()).getLocation();
+        for (Map.Entry<Integer, Integer> orderDetail : productQuantity.entrySet()) {
+            Product product = prodRep.findOne((long)orderDetail.getKey());
+            Location thisLocation = stockRep.findByProductAndQuantityGreaterThan(product, orderDetail.getValue()).getLocation();
             if (location == null) {
                 location = thisLocation;
             } else if (!thisLocation.equals(location)) {

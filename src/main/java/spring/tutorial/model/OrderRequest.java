@@ -13,9 +13,10 @@ import java.util.Map;
 public @Data
 class OrderRequest {
 
-    private Customer customer;
+    private int customer;
+    private long timeStamp;
     @ManyToOne
-    private Map<Product, Integer> products;
+    private Map<Integer, Integer> products;
     @Embedded
     private Address destination;
 
