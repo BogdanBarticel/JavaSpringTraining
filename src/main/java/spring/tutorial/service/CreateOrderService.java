@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
 import spring.tutorial.repository.*;
-import spring.tutorial.util.SearchStrategy;
+import spring.tutorial.strategy.SearchStrategy;
 
 import java.util.Date;
 import java.util.Map;

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Browse</title>
+</head>
+<body>
+<a href="/">Home </a>
+<a href="/login" th:if="${authenticated} == false">Login </a>
+<a href="/logout" th:if="${authenticated} == true">Logout </a>
+<br/>
+<br/>
+<table id="table">
+    <tr>
+        <th>Car</th>
+        <th>Desc</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+</table>
+
+<p id="total"></p>
+
+<button onclick="buy()" type="button">Place Order</button>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var stock = /*[[${stock}]]*/
+    var prod = /*[[${prod}]]*/
+    var origin = window.location.origin;
+/*]]>*/
+</script>
+<script type="text/javascript" th:src="@{/js/browse.js}"></script>
+</body>
+</html>

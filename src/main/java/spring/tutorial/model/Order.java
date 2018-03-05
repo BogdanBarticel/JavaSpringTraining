@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orderList")
+@Table(name = "order_table")
 public @Data
 class Order {
 
@@ -18,7 +18,6 @@ class Order {
     @ManyToOne
     private Location shippedFrom;
     @Embedded
-
     private Address destination;
 
 }

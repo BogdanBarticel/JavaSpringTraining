@@ -1,30 +1,41 @@
-package spring.tutorial.util;
+package spring.tutorial.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import spring.tutorial.model.Customer;
+import org.springframework.util.StringUtils;
+import spring.tutorial.model.User;
 
 import java.util.Collection;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
-public class ShopUserDetails implements UserDetails {
-    Customer customer;
+public class ShopUserDetails extends User implements UserDetails {
+
+    private List<String> userRoles;
+
+    public ShopUserDetails(User user, List<String> userRoles){
+        super(user);
+        this.userRoles = userRoles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
     @Override
     public String getPassword() {
-        return customer.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return customer.getUserName();
+        return super.getUsername();
     }
 
     @Override

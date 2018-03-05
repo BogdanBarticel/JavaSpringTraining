@@ -18,7 +18,7 @@ public class CreateOrderController {
         this.orderCreator = orderCreator;
     }
 
-    @PostMapping(path = "create", consumes = "application/json", produces = "text/html")
+    @PostMapping(path = "/create", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public String createOrder(@RequestBody OrderRequest orderRequest){
 

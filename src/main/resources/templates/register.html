@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="#" th:action="@{/register}"  method="post">
+    First name:<br/>
+    <input type="text" th:field="${customer.firstName}"/><br/>
+    Last name:<br/>
+    <input type="text" th:field="${customer.lastName}"/><br/>
+    User Name:<br/>
+    <input type="text" th:field="${customer.userName}"/><br/>
+    Country:<br/>
+    <input type="text" th:field="${customer.address.country}"/><br/>
+    County:<br/>
+    <input type="text" th:field="${customer.address.county}"/><br/>
+    City:<br/>
+    <input type="text" th:field="${customer.address.city}"/><br/>
+    Street:<br/>
+    <input type="text" th:field="${customer.address.street}"/><br/>
+    Password:<br/>
+    <input type="password" th:field="${customer.password}"/><br/>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

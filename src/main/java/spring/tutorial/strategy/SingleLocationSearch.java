@@ -1,4 +1,4 @@
-package spring.tutorial.util;
+package spring.tutorial.strategy;
 
 import spring.tutorial.exception.NoStockFoundException;
 import spring.tutorial.model.Location;

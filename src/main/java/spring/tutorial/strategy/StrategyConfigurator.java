@@ -1,4 +1,4 @@
-package spring.tutorial.util;
+package spring.tutorial.strategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

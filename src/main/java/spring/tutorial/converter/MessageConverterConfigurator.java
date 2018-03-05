@@ -1,4 +1,4 @@
-package spring.tutorial.util;
+package spring.tutorial.converter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

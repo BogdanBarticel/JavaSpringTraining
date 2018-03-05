@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to shopz</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:if="${ROLE_ADMIN} == true" class="info">Welcome Administrator!</p>
+<p th:if="${ROLE_CUSTOMER} == true" class="info">Welcome Customer!</p>
+<h1>Main Menu:</h1>
+<a href="/browse" th:if="${ROLE_CUSTOMER}">Browse</a>
+<a href="/export/all" th:if="${ROLE_ADMIN}">Export stock</a>
+<br/>
+<a href="/login" th:if="${authenticated} == false">Login </a>
+<a href="/logout" th:if="${authenticated} == true">Logout </a>
+
+
+
+</body>
+</html>

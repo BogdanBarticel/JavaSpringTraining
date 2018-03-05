@@ -1,4 +1,4 @@
-package spring.tutorial.util;
+package spring.tutorial.strategy;
 
 import spring.tutorial.model.Location;
 
