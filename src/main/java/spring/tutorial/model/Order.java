@@ -15,8 +15,6 @@ class Order {
     private long timeStamp;
     @ManyToOne
     private Customer customer;
-    @ManyToOne
-    private Location shippedFrom;
     @Embedded
     private Address destination;
 

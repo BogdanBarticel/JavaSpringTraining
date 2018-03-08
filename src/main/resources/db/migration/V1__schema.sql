@@ -86,7 +86,6 @@ CREATE TABLE order_table
 (
     id bigint(11) NOT NULL AUTO_INCREMENT,
     time_stamp bigint(100) NOT NULL,
-    shipped_from_id bigint(11) NOT NULL,
     customer_id bigint(11) NOT NULL,
     country varchar(100) NOT NULL,
     county varchar(100) NOT NULL,
@@ -94,7 +93,7 @@ CREATE TABLE order_table
     street varchar(100) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (customer_id) REFERENCES customer(id),
-    FOREIGN KEY (shipped_from_id) REFERENCES location(id)
+
 );
 
 CREATE TABLE order_detail
@@ -102,8 +101,10 @@ CREATE TABLE order_detail
     id bigint(11) NOT NULL AUTO_INCREMENT,
     order_id bigint(11) NOT NULL,
     product_id bigint(11) NOT NULL,
+    shipped_from_id bigint(11) NOT NULL,
     quantity int(11) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (order_id) REFERENCES order_table(id)
+    FOREIGN KEY (order_id) REFERENCES order_table(id),
+    FOREIGN KEY (shipped_from_id) REFERENCES location(id)
 );
 

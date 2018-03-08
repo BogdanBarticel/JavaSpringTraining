@@ -6,6 +6,6 @@ insert into user_role (user_id, role) values (1, 'ROLE_ADMIN');
 insert into user_role (user_id, role) values (2, 'ROLE_CUSTOMER');
 insert into user_role (user_id, role) values (3, 'ROLE_ADMIN');
 insert into user_role (user_id, role) values (3, 'ROLE_CUSTOMER');
-insert into customer (first_name, last_name, country, county, city, street, user_id) values ('Maricica', 'Petronela', 'Romania', 'Vaslui', 'Vaslui', 'Str. Baltii nr. 9', 1);
+insert into customer (first_name, last_name, country, county, city, street, user_id) values ('Maricica', 'Petronela', 'Romania', 'Vaslui', 'Vaslui', 'Bulevardul Traian nr. 8', 1);
 insert into customer (first_name, last_name, country, county, city, street, user_id) values ('Marinel', 'Marcel', 'Romania', 'Vaslui', 'Vaslui', 'Str. Baltii nr. 9', 2);
 

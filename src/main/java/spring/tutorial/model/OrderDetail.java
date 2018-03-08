@@ -15,12 +15,15 @@ class OrderDetail {
     private Order order;
     @ManyToOne
     private Product product;
+    @ManyToOne
+    private Location shippedFrom;
     private int quantity;
 
-    public OrderDetail(Order order, Product product, int quantity) {
+    public OrderDetail(Order order, Product product, int quantity, Location shippedFrom) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
+        this.shippedFrom = shippedFrom;
     }
 
 }

@@ -16,4 +16,11 @@ class Address {
     private String county;
     private String street;
 
+
+    public String toUrlFormatString() {
+        String urlString = country+","+city+","+county+","+street;
+        urlString = urlString.replaceAll("\\s+", "+");
+        return urlString;
+    }
+
 }

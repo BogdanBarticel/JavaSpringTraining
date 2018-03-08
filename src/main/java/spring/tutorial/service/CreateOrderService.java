@@ -36,9 +36,8 @@ public class CreateOrderService {
     @Transactional
     public Order createOrder(OrderRequest request) {
         Order order = new Order();
-        order.setShippedFrom(locationSearch.findLocation(request.getProducts()));
-        order.setDestination(request.getDestination());
         order.setCustomer(custRep.findOne((long)request.getCustomer()));
+        order.setDestination(request.getDestination());
         if (request.getTimeStamp() == 0L ){
             Date date = new Date();
             order.setTimeStamp(date.getTime());
@@ -50,9 +49,10 @@ public class CreateOrderService {
             if (entry.getValue() < 1) {
                 throw new OrderNotCreatedException();
             }
-            OrderDetail detail = new OrderDetail(order, product, entry.getValue());
+            Location shippedFrom = locationSearch.findLocation(product,entry.getValue(), order.getCustomer());
+            OrderDetail detail = new OrderDetail(order, product, entry.getValue(), shippedFrom);
             detailRep.save(detail);
-            updateStock(product, order.getShippedFrom(), entry.getValue());
+            updateStock(product, detail.getShippedFrom(), entry.getValue());
         }
         return order;
     }

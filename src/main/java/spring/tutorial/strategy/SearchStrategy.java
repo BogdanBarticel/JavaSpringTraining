@@ -1,10 +1,10 @@
 package spring.tutorial.strategy;
 
+import spring.tutorial.model.Customer;
 import spring.tutorial.model.Location;
-
-import java.util.Map;
+import spring.tutorial.model.Product;
 
 public interface SearchStrategy {
 
-    Location findLocation(Map<Integer, Integer> productQuantity);
+    Location findLocation(Product product, int quantity, Customer customer);
 }
