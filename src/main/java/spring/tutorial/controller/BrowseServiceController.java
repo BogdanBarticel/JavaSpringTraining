@@ -9,7 +9,7 @@ import spring.tutorial.model.Product;
 import spring.tutorial.model.Stock;
 import spring.tutorial.repository.ProductRepository;
 import spring.tutorial.repository.StockRepository;
-import spring.tutorial.util.ShopAuthorityUtil;
+import spring.tutorial.util.ShopAuthorityHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,8 @@ public class BrowseServiceController {
     @GetMapping(value = "/browse")
     public String browse(Model model) {
         model = getProductAndStock(model);
-        model = ShopAuthorityUtil.setAuthorityAttributes(model);
+        model = ShopAuthorityHelper.setAuthorityAttributes(model);
+
         return "browse";
     }
 

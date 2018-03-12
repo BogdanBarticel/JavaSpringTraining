@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 
 import java.util.Collection;
 
-public class ShopAuthorityUtil {
+public class ShopAuthorityHelper {
 
     public static Model setAuthorityAttributes(Model model) {
         if(SecurityContextHolder.getContext().getAuthentication() == null){

@@ -1,4 +1,4 @@
-package spring.tutorial.security;
+package spring.tutorial.configurator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import spring.tutorial.security.ShopUserDetailsService;
 
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = ShopUserDetailsService.class)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -33,17 +34,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.anonymous().disable().httpBasic()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/export/**").hasAuthority("ROLE_ADMIN")
-                .and()
-                .formLogin().loginPage("/login").failureUrl("/login-error")
-                .usernameParameter("username").passwordParameter("password")
-                .and()
-                .logout().logoutSuccessUrl("/")
-                .and()
-                .exceptionHandling().accessDeniedPage("/login-error");
+        http.anonymous().disable().headers().frameOptions().disable().and()
+            .authorizeRequests()
+            .antMatchers("/export/**").hasAuthority("ROLE_ADMIN")
+            .antMatchers("/create").hasAuthority("ROLE_CUSTOMER")
+            .antMatchers("/browse").hasAuthority("ROLE_CUSTOMER")
+            .and()
+            .formLogin().loginPage("/login").failureUrl("/login-error")
+            .usernameParameter("username").passwordParameter("password")
+            .and()
+            .logout().logoutSuccessUrl("/")
+            .and()
+            .exceptionHandling().accessDeniedPage("/login-error");
         http.csrf().disable();
     }
 }

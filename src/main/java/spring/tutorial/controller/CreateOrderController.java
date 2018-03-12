@@ -1,16 +1,26 @@
 package spring.tutorial.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import spring.tutorial.model.Order;
+import spring.tutorial.model.OrderDetail;
 import spring.tutorial.model.OrderRequest;
+import spring.tutorial.repository.OrderDetailRepository;
 import spring.tutorial.service.CreateOrderService;
 
-@RestController
+import java.util.List;
+
+@Controller
 public class CreateOrderController {
+
+    @Autowired
+    private OrderDetailRepository detailRepository;
 
     private CreateOrderService orderCreator;
     @Autowired
@@ -20,9 +30,19 @@ public class CreateOrderController {
 
     @PostMapping(path = "/create", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public String createOrder(@RequestBody OrderRequest orderRequest){
+    public String createOrder(@RequestBody OrderRequest orderRequest) throws JsonProcessingException {
 
-        return orderCreator.createOrder(orderRequest).toString();
+        Order order = orderCreator.createOrder(orderRequest);
+        ObjectMapper om = new ObjectMapper();
+        String returnJson = "[" + om.writeValueAsString(order);
+        List<OrderDetail> ods = detailRepository.findByOrder(order);
+        for(OrderDetail od : ods){
+            returnJson = returnJson + ", " + om.writeValueAsString(od);
+        }
+
+        returnJson = returnJson + "]";
+
+        return returnJson;
 
 
     }

@@ -1,10 +1,13 @@
-package spring.tutorial.strategy;
+package spring.tutorial.configurator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import spring.tutorial.repository.StockRepository;
+import spring.tutorial.strategy.ClosestLocationSearch;
+import spring.tutorial.strategy.SearchStrategy;
+import spring.tutorial.strategy.SingleLocationSearch;
 
 
 @Configuration

@@ -2,6 +2,10 @@
 
     var $table = $('table');
 
+    var order = {};
+
+    refreshOrder();
+
     for(var i=0; i<prod.length; i++){
          $table.append("<tr><td>"
          +prod[i].name+"</td><td>"
@@ -37,14 +41,30 @@
             };
 
     function buy(){
-        var order =
+
+        for(var i=0; i<prod.length; i++){
+          var quantity = document.getElementById('quantity'+i).value;
+          if (quantity > 0) {
+                order.products[prod[i].id] = quantity;
+          }
+        }
+
+        $.postJSON(origin+"/create", order, function(data){
+            console.log(data);
+        })
+        location.refresh();
+
+
+    }
+
+    function refreshOrder(){
+
+        order =
         {
             "customer":1,
             "timeStamp":1,
             "products":
-            {
-                "1":1
-            },
+            {},
             "destination":
             {
                 "country":"a",
@@ -53,12 +73,6 @@
                 "street":"d"
             }
         }
-
-        $.postJSON(origin+"/create", order, function(data){
-            console.log(data);
-        })
-
-
 
     }
 

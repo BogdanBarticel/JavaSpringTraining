@@ -10,20 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import spring.tutorial.model.Address;
 import spring.tutorial.model.Customer;
 import spring.tutorial.model.User;
-import spring.tutorial.util.ShopAuthorityUtil;
+import spring.tutorial.util.ShopAuthorityHelper;
 
-
-/**
- * Sample service.
- *
- * @author P.J. Meisch (pj.meisch@sothawo.com).
- */
 @Controller
 public class UserServiceController {
 
     @GetMapping(value = "/login")
     public String login(Model model) {
-        ShopAuthorityUtil.setAuthorityAttributes(model);
+        ShopAuthorityHelper.setAuthorityAttributes(model);
         return "login";
     }
 

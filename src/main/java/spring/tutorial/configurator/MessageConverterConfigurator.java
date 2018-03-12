@@ -1,7 +1,8 @@
-package spring.tutorial.converter;
+package spring.tutorial.configurator;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import spring.tutorial.converter.CsvMessageConverter;
 
 
 @Configuration
