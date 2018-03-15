@@ -1,5 +1,6 @@
 package spring.tutorial.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public @Data
 class Customer {
 

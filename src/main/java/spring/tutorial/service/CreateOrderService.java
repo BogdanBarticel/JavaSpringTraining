@@ -24,7 +24,7 @@ public class CreateOrderService {
     private final SearchStrategy locationSearch;
 
     @Autowired
-    public CreateOrderService(OrderRepository orderRep, StockRepository stockRep, SearchStrategy strategy, OrderDetailRepository detailRep, ProductRepository prodRep, CustomerRepository custRep) {
+    public CreateOrderService(OrderRepository orderRep, OrderDetailRepository detailRep, CustomerRepository custRep, StockRepository stockRep, ProductRepository prodRep, SearchStrategy strategy) {
         this.orderRep = orderRep;
         this.stockRep = stockRep;
         this.locationSearch = strategy;
@@ -36,32 +36,46 @@ public class CreateOrderService {
     @Transactional
     public Order createOrder(OrderRequest request) {
         Order order = new Order();
-        order.setCustomer(custRep.findOne((long)request.getCustomer()));
-        order.setDestination(request.getDestination());
-        if (request.getTimeStamp() == 0L ){
-            Date date = new Date();
-            order.setTimeStamp(date.getTime());
+        Customer customer = custRep.findOne((long) request.getCustomer());
+        if(request.getDestination() != null && customer != null) {
+            order.setCustomer(customer);
+            order.setDestination(request.getDestination());
+        } else {
+            throw new OrderNotCreatedException();
         }
+        Date date = new Date();
+        order.setTimeStamp(date.getTime());
         orderRep.save(order);
 
-        for(Map.Entry<Integer, Integer> entry : request.getProducts().entrySet()) {
+        if( request.getProducts() != null ) {
+            createOrderDetails(request.getProducts(), order);
+        } else {
+            throw new OrderNotCreatedException();
+        }
+
+        return order;
+    }
+
+    private void createOrderDetails(Map<Integer, Integer> products, Order order){
+        for (Map.Entry<Integer, Integer> entry : products.entrySet()) {
             Product product = prodRep.findOne(entry.getKey().longValue());
-            if (entry.getValue() < 1) {
+            if (entry.getValue() < 1 || product == null) {
                 throw new OrderNotCreatedException();
             }
-            Location shippedFrom = locationSearch.findLocation(product,entry.getValue(), order.getCustomer());
+            Location shippedFrom = locationSearch.findLocation(product, entry.getValue(), order.getCustomer());
             OrderDetail detail = new OrderDetail(order, product, entry.getValue(), shippedFrom);
             detailRep.save(detail);
             updateStock(product, detail.getShippedFrom(), entry.getValue());
         }
-        return order;
     }
 
     private void updateStock(Product product, Location location, int quantity) {
-        Optional<Stock> stock = Optional.ofNullable(stockRep.findByProductAndLocation(product, location));
-        if (stock.isPresent()) {
-            stock.get().setQuantity(stock.get().getQuantity() - quantity);
-            stockRep.save(stock.get());
+        Stock stock = stockRep.findByProductAndLocation(product, location);
+        if (stock != null) {
+            stock.setQuantity(stock.getQuantity() - quantity);
+            stockRep.save(stock);
+        } else {
+            throw new OrderNotCreatedException();
         }
     }
 

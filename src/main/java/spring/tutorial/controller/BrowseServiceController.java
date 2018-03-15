@@ -30,7 +30,6 @@ public class BrowseServiceController {
     public String browse(Model model) {
         model = getProductAndStock(model);
         model = ShopAuthorityHelper.setAuthorityAttributes(model);
-
         return "browse";
     }
 
