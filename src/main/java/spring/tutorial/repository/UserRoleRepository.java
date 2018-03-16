@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserRoleRepository extends CrudRepository<UserRole, Long> {
 
-   public List<UserRole> findUserRoleByUserId(Long userId);
+    List<UserRole> findUserRoleByUserId(Long userId);
 }

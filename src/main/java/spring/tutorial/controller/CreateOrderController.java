@@ -23,6 +23,7 @@ public class CreateOrderController {
     private OrderDetailRepository detailRepository;
 
     private CreateOrderService orderCreator;
+
     @Autowired
     public CreateOrderController(CreateOrderService orderCreator) {
         this.orderCreator = orderCreator;
@@ -34,15 +35,14 @@ public class CreateOrderController {
 
         Order order = orderCreator.createOrder(orderRequest);
         ObjectMapper om = new ObjectMapper();
-        String returnJson = "[" + om.writeValueAsString(order);
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(om.writeValueAsString(order));
         List<OrderDetail> ods = detailRepository.findByOrder(order);
-        for(OrderDetail od : ods){
-            returnJson = returnJson + ", " + om.writeValueAsString(od);
+        for (OrderDetail od : ods) {
+            sb.append(", ").append(om.writeValueAsString(od));
         }
-
-        returnJson = returnJson + "]";
-
-        return returnJson;
+        sb.append("]");
+        return sb.toString();
 
 
     }

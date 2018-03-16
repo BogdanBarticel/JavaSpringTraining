@@ -1,6 +1,5 @@
 package spring.tutorial.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 import spring.tutorial.model.Address;
@@ -11,14 +10,14 @@ import spring.tutorial.model.pojo.google.matrix.Row;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoogleDistanceComparator implements  DistanceComparator {
+public class GoogleDistanceComparator implements DistanceComparator {
 
 
     @Value("${google.distance.url}")
     private String url;
     private RestTemplate restTemplate;
 
-    public GoogleDistanceComparator(RestTemplate restTemplate){
+    public GoogleDistanceComparator(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
@@ -41,12 +40,12 @@ public class GoogleDistanceComparator implements  DistanceComparator {
     }
 
     private String generateParamStringFromList(List<Location> destinationsList) {
-        String destinations = "";
+        StringBuilder sb = new StringBuilder();
         for (Location destination : destinationsList) {
-            if (!destinations.equals("")) destinations = destinations + "|";
-            destinations = destinations + destination.getAddress().toUrlFormatString();
+            if (sb.length() < 1) sb.append("|");
+            sb.append(destination.getAddress().toUrlFormatString());
         }
-        return destinations;
+        return sb.toString();
     }
 
 }

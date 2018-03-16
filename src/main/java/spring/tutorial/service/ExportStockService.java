@@ -23,7 +23,7 @@ public class ExportStockService {
     }
 
     public List<Stock> exportAllStocksFromLocation(int locationId) {
-        Location location = locationRep.findOne((long)locationId);
+        Location location = locationRep.findOne((long) locationId);
         List<Stock> stocks = stockRep.findByLocation(location);
         if (stocks.isEmpty()) {
             throw new NoStockFoundException();

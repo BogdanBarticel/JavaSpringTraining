@@ -29,7 +29,7 @@ public class StockExportController {
 
     @GetMapping(path = "/export", produces = "text/csv")
     public List<StockPojo> export(@RequestParam("location") long locationId) {
-        int id = (int)locationId;
+        int id = (int) locationId;
         return StockPojo.fromStockList(stockExporter.exportAllStocksFromLocation(id));
     }
 
@@ -37,8 +37,8 @@ public class StockExportController {
     public List<StockPojo> exportAll() {
         List<Location> locations = locationRep.findAll();
         List<Stock> stockList = new ArrayList<>();
-        for(Location loc: locations){
-            stockList.addAll(stockExporter.exportAllStocksFromLocation((int)loc.getId()));
+        for (Location loc : locations) {
+            stockList.addAll(stockExporter.exportAllStocksFromLocation((int) loc.getId()));
         }
         return StockPojo.fromStockList(stockList);
     }

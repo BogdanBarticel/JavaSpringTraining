@@ -8,7 +8,6 @@ import spring.tutorial.model.Product;
 import spring.tutorial.model.Stock;
 import spring.tutorial.repository.StockRepository;
 import spring.tutorial.util.DistanceComparator;
-import spring.tutorial.util.GoogleDistanceComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class ClosestLocationSearch implements SearchStrategy {
     public Location findLocation(Product product, int quantity, Customer customer) {
         List<Stock> stocks = stockRep.findAllByProductAndQuantityGreaterThan(product, quantity);
         List<Location> locations = new ArrayList<>();
-        if(stocks == null || stocks.isEmpty()){
+        if (stocks == null || stocks.isEmpty()) {
             throw new NoStockFoundException();
         } else {
             for (Stock stock : stocks) {

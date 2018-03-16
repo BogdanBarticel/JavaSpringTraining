@@ -17,7 +17,7 @@ public class ShopUserDetails extends User implements UserDetails {
 
     private List<String> userRoles;
 
-    public ShopUserDetails(User user, List<String> userRoles){
+    public ShopUserDetails(User user, List<String> userRoles) {
         super(user);
         this.userRoles = userRoles;
     }
@@ -26,16 +26,6 @@ public class ShopUserDetails extends User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return super.getUsername();
     }
 
     @Override

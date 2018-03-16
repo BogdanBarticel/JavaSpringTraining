@@ -14,8 +14,8 @@ public class BaseRestController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping(value = "/",  produces = "text/html")
-    public String home(Model model){
+    @GetMapping(value = "/", produces = "text/html")
+    public String home(Model model) {
         ShopAuthorityHelper.setAuthorityAttributes(model);
         return "home";
 

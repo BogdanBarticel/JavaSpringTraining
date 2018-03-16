@@ -35,17 +35,17 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.anonymous().disable().headers().frameOptions().disable().and()
-            .authorizeRequests()
-            .antMatchers("/export/**").hasAuthority("ROLE_ADMIN")
-            .antMatchers("/create").hasAuthority("ROLE_CUSTOMER")
-            .antMatchers("/browse").hasAuthority("ROLE_CUSTOMER")
-            .and()
-            .formLogin().loginPage("/login").failureUrl("/login-error")
-            .usernameParameter("username").passwordParameter("password")
-            .and()
-            .logout().logoutSuccessUrl("/")
-            .and()
-            .exceptionHandling().accessDeniedPage("/login-error");
+                .authorizeRequests()
+                .antMatchers("/export/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/create").hasAuthority("ROLE_CUSTOMER")
+                .antMatchers("/browse").hasAuthority("ROLE_CUSTOMER")
+                .and()
+                .formLogin().loginPage("/login").failureUrl("/login-error")
+                .usernameParameter("username").passwordParameter("password")
+                .and()
+                .logout().logoutSuccessUrl("/")
+                .and()
+                .exceptionHandling().accessDeniedPage("/login-error");
         http.csrf().disable();
     }
 }

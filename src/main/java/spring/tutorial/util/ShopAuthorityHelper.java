@@ -9,8 +9,11 @@ import java.util.Collection;
 
 public class ShopAuthorityHelper {
 
+    private ShopAuthorityHelper() {
+    }
+
     public static Model setAuthorityAttributes(Model model) {
-        if(SecurityContextHolder.getContext().getAuthentication() == null){
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
             model.addAttribute("authenticated", false);
         } else {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();

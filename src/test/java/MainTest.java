@@ -9,10 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestTemplate;
 import spring.tutorial.Main;
 import spring.tutorial.exception.NoStockFoundException;
 import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
+import spring.tutorial.model.pojo.google.matrix.Distance;
+import spring.tutorial.model.pojo.google.matrix.DistanceElement;
+import spring.tutorial.model.pojo.google.matrix.DistanceMatrixResponse;
+import spring.tutorial.model.pojo.google.matrix.Row;
 import spring.tutorial.repository.*;
 import spring.tutorial.security.ShopUserDetailsService;
 import spring.tutorial.service.CreateOrderService;
@@ -20,6 +25,7 @@ import spring.tutorial.strategy.ClosestLocationSearch;
 import spring.tutorial.strategy.SearchStrategy;
 import spring.tutorial.strategy.SingleLocationSearch;
 import spring.tutorial.util.DistanceComparator;
+import spring.tutorial.util.GoogleDistanceComparator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +41,6 @@ import static org.mockito.Matchers.*;
 @SpringBootTest(classes = Main.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainTest {
 
-
     private Address closeAdd, farAdd, customerAdd;
     private CreateOrderService createOrderService;
     private Map<Integer, Integer> products;
@@ -43,8 +48,6 @@ public class MainTest {
     private Product product;
     private Customer customer;
     private Stock stock;
-
-
 
     @Mock
     private StockRepository stockRepo;
@@ -62,6 +65,8 @@ public class MainTest {
     private CustomerRepository customerRepository;
     @Mock
     private SearchStrategy mockStrategy;
+    @Mock
+    private RestTemplate restTemplate;
 
     @Autowired
     private DistanceComparator comparator;
@@ -78,6 +83,9 @@ public class MainTest {
         given(customerRepository.findOne(1L)).willReturn(customer);
         given(productRepository.findOne(1L)).willReturn(product);
         given(stockRepo.findByProductAndLocation(anyObject(), anyObject())).willReturn(stock);
+        given(restTemplate.getForObject(anyString(), anyObject(), anyString(), anyString()))
+                .willReturn(generateMockResponse());
+        comparator = new GoogleDistanceComparator(restTemplate);
 
     }
 
@@ -157,7 +165,7 @@ public class MainTest {
         User user = new User();
         user.setPassword("password");
         ShopUserDetailsService shopUserDetailsService = new ShopUserDetailsService(userRepository, roleRepository);
-        
+
         given(userRepository.findByUsername("user")).willReturn(user);
         given(userRepository.findByUsername("non-user")).willReturn(null);
 
@@ -203,6 +211,27 @@ public class MainTest {
         assertNotNull(strategy.findLocation(product, 1, customer)); //search 1 , get a non null location;
         assertNotNull(strategy.findLocation(product, 2, customer)); //search 2, no stock found, throws exception;
         strategy.findLocation(product, 2, customer); //search 2, no stock found, throws exception;
+    }
+
+    private DistanceMatrixResponse generateMockResponse(){
+        DistanceMatrixResponse response = new DistanceMatrixResponse();
+        List<Row> rows = new ArrayList<>();
+        List<DistanceElement> distanceElements = new ArrayList<>();
+        DistanceElement distanceElement1 = new DistanceElement();
+        Distance distance1 = new Distance();
+        distance1.setValue(1);
+        DistanceElement distanceElement2 = new DistanceElement();
+        Distance distance2 = new Distance();
+        distance2.setValue(2);
+        distanceElement1.setDistance(distance1);
+        distanceElement2.setDistance(distance2);
+        distanceElements.add(distanceElement1);
+        distanceElements.add(distanceElement2);
+        Row row = new Row();
+        row.setElements(distanceElements);
+        rows.add(row);
+        response.setRows(rows);
+        return response;
     }
 
 }

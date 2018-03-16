@@ -10,7 +10,6 @@ import spring.tutorial.strategy.SearchStrategy;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class CreateOrderService {
@@ -37,7 +36,7 @@ public class CreateOrderService {
     public Order createOrder(OrderRequest request) {
         Order order = new Order();
         Customer customer = custRep.findOne((long) request.getCustomer());
-        if(request.getDestination() != null && customer != null) {
+        if (request.getDestination() != null && customer != null) {
             order.setCustomer(customer);
             order.setDestination(request.getDestination());
         } else {
@@ -47,7 +46,7 @@ public class CreateOrderService {
         order.setTimeStamp(date.getTime());
         orderRep.save(order);
 
-        if( request.getProducts() != null ) {
+        if (request.getProducts() != null) {
             createOrderDetails(request.getProducts(), order);
         } else {
             throw new OrderNotCreatedException();
@@ -56,7 +55,7 @@ public class CreateOrderService {
         return order;
     }
 
-    private void createOrderDetails(Map<Integer, Integer> products, Order order){
+    private void createOrderDetails(Map<Integer, Integer> products, Order order) {
         for (Map.Entry<Integer, Integer> entry : products.entrySet()) {
             Product product = prodRep.findOne(entry.getKey().longValue());
             if (entry.getValue() < 1 || product == null) {

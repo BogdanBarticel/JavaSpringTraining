@@ -21,7 +21,7 @@ public class ShopUserDetailsService implements UserDetailsService {
     private UserRoleRepository roleRepository;
 
     @Autowired
-    public ShopUserDetailsService (UserRepository userRepository, UserRoleRepository roleRepository){
+    public ShopUserDetailsService(UserRepository userRepository, UserRoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -35,7 +35,7 @@ public class ShopUserDetailsService implements UserDetailsService {
         } else {
             List<UserRole> userRoleList = roleRepository.findUserRoleByUserId(user.getId());
             List<String> roleList = new ArrayList<>();
-            for(UserRole role : userRoleList){
+            for (UserRole role : userRoleList) {
                 roleList.add(role.getRole());
             }
             return new ShopUserDetails(user, roleList);

@@ -34,6 +34,7 @@ public class UserServiceController {
         model.addAttribute(new Address());
         return "register";
     }
+
     @PostMapping(value = "/register")
     public String register(@ModelAttribute User user) {
 

@@ -8,7 +8,6 @@ import spring.tutorial.strategy.ClosestLocationSearch;
 import spring.tutorial.strategy.SearchStrategy;
 import spring.tutorial.strategy.SingleLocationSearch;
 import spring.tutorial.util.DistanceComparator;
-import spring.tutorial.util.GoogleDistanceComparator;
 
 
 @Configuration
