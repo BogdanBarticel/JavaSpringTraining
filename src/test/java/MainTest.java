@@ -36,7 +36,6 @@ import static junit.framework.TestCase.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.*;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Main.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainTest {
@@ -86,7 +85,6 @@ public class MainTest {
         given(restTemplate.getForObject(anyString(), anyObject(), anyString(), anyString()))
                 .willReturn(generateMockResponse());
         comparator = new GoogleDistanceComparator(restTemplate);
-
     }
 
     @Test
@@ -121,7 +119,6 @@ public class MainTest {
         request = new OrderRequest(1,1, products, customerAdd);
         createOrderService.createOrder(request);
     }
-
 
     @Test(expected = OrderNotCreatedException.class)
     public void createOrderProductNull() {

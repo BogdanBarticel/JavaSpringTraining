@@ -5,21 +5,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigInteger;
+import java.util.Date;
 
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public @Data
-class Stock {
+public class Revenue {
 
-
+    public Revenue(Location location, Date date, BigInteger sum){
+        this.location = location;
+        this.date = date;
+        this.sum = sum;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToOne
-    private Product product;
-    @OneToOne
+    @ManyToOne
     private Location location;
-    private int quantity;
+    private Date date;
+    private BigInteger sum;
+
 }

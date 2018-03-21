@@ -1,10 +1,12 @@
 package spring.tutorial.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 public @Data
 class OrderDetail {
 

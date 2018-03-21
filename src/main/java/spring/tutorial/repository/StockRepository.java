@@ -18,4 +18,6 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
     Stock findByProductAndLocation(Product product, Location location);
 
     List<Stock> findByProduct(Product product);
+
+    List<Stock> findAll();
 }

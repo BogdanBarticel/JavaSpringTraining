@@ -42,7 +42,7 @@ public class GoogleDistanceComparator implements DistanceComparator {
     private String generateParamStringFromList(List<Location> destinationsList) {
         StringBuilder sb = new StringBuilder();
         for (Location destination : destinationsList) {
-            if (sb.length() < 1) sb.append("|");
+            if (sb.length() > 0) sb.append("|");
             sb.append(destination.getAddress().toUrlFormatString());
         }
         return sb.toString();
