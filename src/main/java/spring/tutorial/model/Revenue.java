@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Revenue {
 
-    public Revenue(Location location, Date date, BigInteger sum){
+    public Revenue(Location location, Date date, Double sum){
         this.location = location;
         this.date = date;
         this.sum = sum;
@@ -26,6 +26,6 @@ public class Revenue {
     @ManyToOne
     private Location location;
     private Date date;
-    private BigInteger sum;
+    private Double sum;
 
 }

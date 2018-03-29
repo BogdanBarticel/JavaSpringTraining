@@ -1,0 +1,15 @@
+template for testing odata create service:
+
+url: localhost:8080/odata/create/SingleRequests/
+method: POST
+body:
+{
+	"Id" : 1,
+	"Product" : 1,
+	"Quantity" : 1,
+	"Country" : "Romania",
+	"County": "Vaslui",
+	"City" : "Vaslui",
+	"Street" : "Str. Baltii nr. 9"
+}
+

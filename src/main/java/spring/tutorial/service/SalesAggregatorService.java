@@ -8,7 +8,6 @@ import spring.tutorial.repository.LocationRepository;
 import spring.tutorial.repository.OrderDetailRepository;
 import spring.tutorial.repository.RevenueRepository;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -30,18 +29,18 @@ public class SalesAggregatorService {
         Date date = new Date();
         List<Location> stocks = locationRepository.findAll();
         for(Location location : stocks){
-            int sum = getSalesForLocation(location);
-            Revenue revenue = new Revenue(location, date, BigInteger.valueOf(sum) );
+            Double sum = getSalesForLocation(location);
+            Revenue revenue = new Revenue(location, date, sum );
             revenueRepository.save(revenue);
         }
 
     }
 
-    private int getSalesForLocation(Location loc) {
-        int sum = 0;
+    private Double getSalesForLocation(Location loc) {
+        Double sum = Double.valueOf(0);
         List<OrderDetail> orderDetails = detailRepository.findAllByShippedFrom(loc);
         for(OrderDetail details : orderDetails){
-             sum += details.getProduct().getPrice().intValue() * details.getQuantity();
+             sum += details.getProduct().getPrice() * details.getQuantity();
         }
         return sum;
     }

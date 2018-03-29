@@ -13,7 +13,7 @@ import spring.tutorial.model.User;
 import spring.tutorial.util.ShopAuthorityHelper;
 
 @Controller
-public class UserServiceController {
+public class UserController {
 
     @GetMapping(value = "/login")
     public String login(Model model) {

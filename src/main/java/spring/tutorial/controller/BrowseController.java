@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class BrowseServiceController {
+public class BrowseController {
 
     private ProductRepository prodRep;
     private StockRepository stockRep;
 
     @Autowired
-    public BrowseServiceController(ProductRepository prodRep, StockRepository stockRep) {
+    public BrowseController(ProductRepository prodRep, StockRepository stockRep) {
         this.prodRep = prodRep;
         this.stockRep = stockRep;
     }
