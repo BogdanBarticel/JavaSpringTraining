@@ -1,11 +1,10 @@
-package spring.tutorial.model;
+package spring.tutorial.model.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import spring.tutorial.model.Address;
 
-import javax.persistence.Embedded;
-import javax.persistence.ManyToOne;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -15,9 +14,7 @@ class OrderRequest {
 
     private int customer;
     private long timeStamp;
-    @ManyToOne
     private Map<Integer, Integer> products;
-    @Embedded
     private Address destination;
 
 }

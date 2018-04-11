@@ -35,9 +35,8 @@ public class ShopUserDetailsService implements UserDetailsService {
         } else {
             List<UserRole> userRoleList = roleRepository.findUserRoleByUserId(user.getId());
             List<String> roleList = new ArrayList<>();
-            for (UserRole role : userRoleList) {
-                roleList.add(role.getRole());
-            }
+            userRoleList.stream().forEach(role -> roleList.add(role.getRole()));
+
             return new ShopUserDetails(user, roleList);
         }
 

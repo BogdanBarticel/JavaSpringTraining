@@ -13,7 +13,9 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
 
     List<Stock> findAllByProductAndQuantityGreaterThan(Product product, int quantity);
 
-    List<Stock> findByLocation(Location location);
+    List<Stock> findAllByProductAndLocationAndQuantityGreaterThan(Product product, Location location, int quantity);
+
+    List<Stock> findByLocation(int locationId);
 
     Stock findByProductAndLocation(Product product, Location location);
 

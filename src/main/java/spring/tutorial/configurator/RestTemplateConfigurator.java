@@ -12,13 +12,8 @@ import java.net.Proxy;
 @Configuration
 public class RestTemplateConfigurator {
 
-    @Value("${shop.proxy.domain}")
-    private String domain;
-    @Value("${shop.proxy.port}")
-    private int port;
-
     @Bean
-    public RestTemplate getRestTemplate() {
+    public RestTemplate getRestTemplate(@Value("${shop.proxy.domain}") String domain,  @Value("${shop.proxy.port}") int port) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setProxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(domain, port)));
         return new RestTemplate(requestFactory);

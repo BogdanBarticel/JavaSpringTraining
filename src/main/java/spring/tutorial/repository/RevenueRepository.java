@@ -5,5 +5,4 @@ import spring.tutorial.model.Revenue;
 
 public interface RevenueRepository extends CrudRepository<Revenue, Long> {
 
-
 }

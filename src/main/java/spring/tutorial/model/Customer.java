@@ -17,7 +17,7 @@ class Customer {
     private long id;
     private String firstName;
     private String lastName;
-    @ManyToOne
+    @OneToOne
     private User user;
     @Embedded
     private Address address;

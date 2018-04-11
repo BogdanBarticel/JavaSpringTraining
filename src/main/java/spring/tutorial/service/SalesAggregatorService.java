@@ -1,6 +1,7 @@
 package spring.tutorial.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.tutorial.model.Location;
 import spring.tutorial.model.OrderDetail;
 import spring.tutorial.model.Revenue;
@@ -11,11 +12,11 @@ import spring.tutorial.repository.RevenueRepository;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class SalesAggregatorService {
 
     private OrderDetailRepository detailRepository;
     private LocationRepository locationRepository;
-
     private RevenueRepository revenueRepository;
 
     @Autowired
@@ -33,7 +34,6 @@ public class SalesAggregatorService {
             Revenue revenue = new Revenue(location, date, sum );
             revenueRepository.save(revenue);
         }
-
     }
 
     private Double getSalesForLocation(Location loc) {

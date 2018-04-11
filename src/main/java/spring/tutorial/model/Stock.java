@@ -17,9 +17,9 @@ class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToOne
+    @ManyToOne
     private Product product;
-    @OneToOne
+    @ManyToOne
     private Location location;
     private int quantity;
 }

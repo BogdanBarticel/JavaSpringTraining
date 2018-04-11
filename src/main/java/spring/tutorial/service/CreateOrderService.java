@@ -1,14 +1,19 @@
 package spring.tutorial.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
+import spring.tutorial.model.pojo.OrderRequest;
 import spring.tutorial.repository.*;
 import spring.tutorial.strategy.SearchStrategy;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -47,7 +52,19 @@ public class CreateOrderService {
         orderRep.save(order);
 
         if (request.getProducts() != null) {
-            createOrderDetails(request.getProducts(), order);
+            Map<Product, Integer> products = new HashMap<>();
+            for (Map.Entry<Integer, Integer> entry : request.getProducts().entrySet()) {
+                Product product = prodRep.findOne(entry.getKey().longValue());
+                if (entry.getValue() < 1 || product == null) {
+                    throw new OrderNotCreatedException();
+                }
+                products.put(product, entry.getValue());
+            }
+            Location shippedFrom;
+            if(!products.isEmpty()) {
+                shippedFrom = locationSearch.findLocation(products, order.getCustomer());
+            }  else throw new OrderNotCreatedException();
+            createOrderDetails(products, order, shippedFrom);
         } else {
             throw new OrderNotCreatedException();
         }
@@ -55,16 +72,11 @@ public class CreateOrderService {
         return order;
     }
 
-    private void createOrderDetails(Map<Integer, Integer> products, Order order) {
-        for (Map.Entry<Integer, Integer> entry : products.entrySet()) {
-            Product product = prodRep.findOne(entry.getKey().longValue());
-            if (entry.getValue() < 1 || product == null) {
-                throw new OrderNotCreatedException();
-            }
-            Location shippedFrom = locationSearch.findLocation(product, entry.getValue(), order.getCustomer());
-            OrderDetail detail = new OrderDetail(order, product, entry.getValue(), shippedFrom);
+    private void createOrderDetails(Map<Product, Integer> products, Order order, Location shippedFrom) {
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+            OrderDetail detail = new OrderDetail(order, entry.getKey(), entry.getValue(), shippedFrom);
             detailRep.save(detail);
-            updateStock(product, detail.getShippedFrom(), entry.getValue());
+            updateStock(entry.getKey(), detail.getShippedFrom(), entry.getValue());
         }
     }
 
@@ -76,6 +88,18 @@ public class CreateOrderService {
         } else {
             throw new OrderNotCreatedException();
         }
+    }
+
+    public String orderDetailsToString(Order order) throws JsonProcessingException {
+        ObjectMapper om = new ObjectMapper();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(om.writeValueAsString(order));
+        List<OrderDetail> ods = detailRep.findByOrder(order);
+        for (OrderDetail od : ods) {
+            sb.append(", ").append(om.writeValueAsString(od));
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
 }

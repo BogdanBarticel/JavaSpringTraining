@@ -2,8 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +12,7 @@ import spring.tutorial.Main;
 import spring.tutorial.exception.NoStockFoundException;
 import spring.tutorial.exception.OrderNotCreatedException;
 import spring.tutorial.model.*;
+import spring.tutorial.model.pojo.OrderRequest;
 import spring.tutorial.model.pojo.google.matrix.Distance;
 import spring.tutorial.model.pojo.google.matrix.DistanceElement;
 import spring.tutorial.model.pojo.google.matrix.DistanceMatrixResponse;
@@ -25,7 +24,6 @@ import spring.tutorial.strategy.ClosestLocationSearch;
 import spring.tutorial.strategy.SearchStrategy;
 import spring.tutorial.strategy.SingleLocationSearch;
 import spring.tutorial.util.DistanceComparator;
-import spring.tutorial.util.GoogleDistanceComparator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +59,8 @@ public class MainTest {
     @Mock
     private ProductRepository productRepository;
     @Mock
+    private LocationRepository locationRepository;
+    @Mock
     private CustomerRepository customerRepository;
     @Mock
     private SearchStrategy mockStrategy;
@@ -84,7 +84,6 @@ public class MainTest {
         given(stockRepo.findByProductAndLocation(anyObject(), anyObject())).willReturn(stock);
         given(restTemplate.getForObject(anyString(), anyObject(), anyString(), anyString()))
                 .willReturn(generateMockResponse());
-        comparator = new GoogleDistanceComparator(restTemplate);
     }
 
     @Test
@@ -203,7 +202,7 @@ public class MainTest {
         given(stockRepo.findAllByProductAndQuantityGreaterThan(product, 2))
                 .willReturn(null);
 
-        SearchStrategy strategy = new ClosestLocationSearch(stockRepo, comparator);
+        SearchStrategy strategy = new ClosestLocationSearch(stockRepo, comparator, locationRepository);
 
         assertNotNull(strategy.findLocation(product, 1, customer)); //search 1 , get a non null location;
         assertNotNull(strategy.findLocation(product, 2, customer)); //search 2, no stock found, throws exception;

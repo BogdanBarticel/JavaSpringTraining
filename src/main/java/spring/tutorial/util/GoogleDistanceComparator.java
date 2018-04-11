@@ -12,13 +12,12 @@ import java.util.List;
 
 public class GoogleDistanceComparator implements DistanceComparator {
 
-
-    @Value("${google.distance.url}")
     private String url;
     private RestTemplate restTemplate;
 
-    public GoogleDistanceComparator(RestTemplate restTemplate) {
+    public GoogleDistanceComparator(RestTemplate restTemplate,  @Value("${google.distance.url}") String url) {
         this.restTemplate = restTemplate;
+        this.url = url;
     }
 
     public Location getClosestLocation(Address destination, List<Location> locations) {
